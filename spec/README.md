@@ -1,20 +1,20 @@
-# OfficialApplicationName Specification
+# MicroWavePerformanceProxy Specification
 
 ### ServiceList
-- [OfficialApplicationName+services](./OfficialApplicationName+services.yaml)
+- [MicroWavePerformanceProxy+services](./MicroWavePerformanceProxy+services.yaml)
 
 ### ProfileList and ProfileInstanceList
-- [OfficialApplicationName+profiles](./OfficialApplicationName+profiles.yaml)
-- [OfficialApplicationName+profileInstances](./OfficialApplicationName+profileInstances.yaml)
+- [MicroWavePerformanceProxy+profiles](./MicroWavePerformanceProxy+profiles.yaml)
+- [MicroWavePerformanceProxy+profileInstances](./MicroWavePerformanceProxy+profileInstances.yaml)
 
 ### ForwardingList
-- [OfficialApplicationName+forwardings](./OfficialApplicationName+forwardings.yaml)
+- [MicroWavePerformanceProxy+forwardings](./MicroWavePerformanceProxy+forwardings.yaml)
 
 ### Open API specification (Swagger)
-- [OfficialApplicationName](./OfficialApplicationName.yaml)
+- [MicroWavePerformanceProxy](./MicroWavePerformanceProxy.yaml)
 
 ### CONFIGfile (JSON)
-- [OfficialApplicationName+config](./OfficialApplicationName+config.json)
+- [MicroWavePerformanceProxy+config](./MicroWavePerformanceProxy+config.json)
 
 ### Comments
 ./.

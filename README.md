@@ -1,20 +1,18 @@
-Delete these statements:  
-- This repository is a template for specifying applications for the MW SDN application layer  
-- Fill in the Location, Description and Relevance below (check existing repositories as templates)
-
-Delete this link at the end of the specification process:  
-- [Roadmap to Specification](../../issues/1)
-
-# OfficialApplicationName
+# MicroWavePerformanceProxy
 
 ### Location
-Location of the application in the logical structure of the application layer.
+The AutomatedLinkAcceptanceProxy belongs to the NetworkApplications.
 
 ### Description
-Four to ten sentences describing the functionalities of the application.
+The MWPP microservice acts as a proxy between the MicroWaveDeviceInventory and an external tool, e.g. APT (in which the performance data shall be stored).
+
+The performance data is collected on demand when the external application is calling the /v1/provide-performance-data-of-link-endpoint service.  
+The data is retrieved from the cache paths at the MicrowaveDeviceInventory and passed on to the external tool.  
+
+The pre-defined set of attributes is provided in a simplified, almost linear structure, but without any translation.
 
 ### Relevance
-Statement about the importance of the application.
+The MicroWavePerformanceProxy fulfils a quality assurance task on the live network.
 
 ### Resources
 - [Specification](./spec/)
@@ -22,4 +20,4 @@ Statement about the importance of the application.
 - [Implementation](./server/)
 
 ### Comments
-This application will be specified during [training for ApplicationOwners](https://gist.github.com/openBackhaul/5aabdbc90257b83b9fe7fc4da059d3cd).
+./.
