@@ -51,6 +51,9 @@ servers:
         - operation-name: /docs
           uuid: mwpp-1-0-0-op-s-bs-005
       individual:
+        - operation-name: /v1/provide-historical-pm-data-of-device 
+          uuid: mwpp-1-0-0-op-s-is-000
+
   http-server:
     own-application-name: MicroWavePerformanceProxy
     own-release-number: 1.0.0
@@ -59,33 +62,20 @@ servers:
     - description: Without TLS layer
       local-protocol: http
       own-ip-address: 127.0.0.1
-      own-tcp-port:
+      own-tcp-port: 4012
       uuid: mwpp-1-0-0-tcp-s-000
 
 
 clients:
 
   - http-client:
-      application-name: ElasticSearch
-      release-number: 1.0.0
-      uuid: mwpp-1-0-0-http-c-es-1-0-0-000
-    tcp-client:
-      remote-protocol: http
-      ip-address: 127.0.0.1
-      tcp-port: 3015
-      uuid: mwpp-1-0-0-tcp-c-es-1-0-0-000
-    elasticsearch-client:
-      uuid: mwpp-1-0-0-es-c-es-1-0-0-000
-      index-alias:
-
-  - http-client:
       application-name: OldRelease
-      release-number:
+      release-number: 1.0.0
       uuid: mwpp-1-0-0-http-c-or-1-0-0-000
     tcp-client:
       remote-protocol: http
       ip-address: 127.0.0.1
-      tcp-port:
+      tcp-port: 4012
       uuid: mwpp-1-0-0-tcp-c-or-1-0-0-000
     operation-clients:
       own-oam:
@@ -99,12 +89,12 @@ clients:
 
   - http-client:
       application-name: NewRelease
-      release-number:
+      release-number: 1.0.0
       uuid: mwpp-1-0-0-http-c-nr-1-0-0-000
     tcp-client:
       remote-protocol: http
       ip-address: 127.0.0.1
-      tcp-port:
+      tcp-port: 4012
       uuid: mwpp-1-0-0-tcp-c-nr-1-0-0-000
     operation-clients:
       own-oam:
@@ -258,3 +248,41 @@ clients:
       service:
         basic:
         individual:
+
+  - http-client:
+      application-name: MicroWaveDeviceInventory
+      release-number: 1.1.0
+      uuid: mwpp-1-0-0-http-c-mwdi-1-1-0-000
+    tcp-client:
+      remote-protocol: http
+      ip-address: 1.1.4.15
+      tcp-port: 4015
+      uuid: mwpp-1-0-0-tcp-c-mwdi-1-1-0-000
+    operation-clients:
+      own-oam:
+        basic:
+        individual:
+      service:
+        basic:
+        individual:
+          - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mount-name}
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-000
+
+          - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mount-name}/logical-termination-point={uuid}/ltp-augment-1-0:ltp-augment-pac
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-201
+
+          - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-capability
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-210
+          - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-configuration
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-211
+          - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-historical-performances
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-214
+
+          - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/ethernet-container-2-0:ethernet-container-pac/ethernet-container-historical-performances
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-224
+
+          - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/ethernet-container-2-0:ethernet-container-pac/ethernet-container-historical-performances
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-224
+
+          - operation-name: /v1/provide-list-of-parallel-links
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-013
