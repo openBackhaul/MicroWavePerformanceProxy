@@ -279,7 +279,5 @@ clients:
             uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-214
 
           - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/ethernet-container-2-0:ethernet-container-pac/ethernet-container-historical-performances
-            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-224
-
-          - operation-name: /v1/provide-list-of-parallel-links
-            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-013
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-22
+            
