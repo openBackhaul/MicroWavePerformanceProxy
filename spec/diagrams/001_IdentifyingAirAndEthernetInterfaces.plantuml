@@ -1,0 +1,34 @@
+@startuml 001_IdentifyingAirandEthernetInterfaces
+skinparam responseMessageBelowArrow true
+
+title
+RequestForProvidingHistoricalPmDataCausesIdentifyingAirandEthernetInterfaces
+end title
+
+participant "LinkVis" as LinkVis
+participant "MWPP://v1/provide-historical-pm-data-of-device" as MWPP
+participant "<i>RequestForProvidingHistoricalPmDataCausesReadingLtpStructure</i>" as LTPs
+participant "MWDI://core-model-1-4:network-control-domain=cache/control-construct={mount-name}/logical-termination-point={uuid}/\nltp-augment-1-0:ltp-augment-pac?fields=(external-label;original-ltp-name)" as LtpDesignation
+
+LinkVis -> MWPP: [{MountName, timeStamp}] (apiKeyAuth)
+activate MWPP
+
+LTPs --> MWPP: {uuid, localId, layerProtocolName}
+
+note over MWPP
+For all uuids with layerProtocolName == AIR_LAYER
+or layerProtocolName == ETHERNET_CONTAINER_LAYER
+end note
+
+MWPP -> LtpDesignation: (apiKeyAuth)
+LtpDesignation --> MWPP: {externalLabel, originalLtpName}
+
+note over MWPP
+For Ltps with layerProtocolName == AIR_LAYER:
+uuid/localId/linkEndpointName = uuid/localId/externalLabel
+
+For Ltps with layerProtocolName == ETHERNET_CONTAINER_LAYER:
+uuid/localId/interfaceName = uuid/localId/originalLtpName
+end note
+
+@enduml
