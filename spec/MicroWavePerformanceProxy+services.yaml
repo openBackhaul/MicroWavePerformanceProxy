@@ -252,12 +252,12 @@ clients:
   - http-client:
       application-name: MicroWaveDeviceInventory
       release-number: 1.1.0
-      uuid: mwpp-1-0-0-http-c-mwdi-1-1-0-000
+      uuid: mwpp-1-0-0-http-c-mwdi-1-1-1-000
     tcp-client:
       remote-protocol: http
       ip-address: 1.1.4.15
       tcp-port: 4015
-      uuid: mwpp-1-0-0-tcp-c-mwdi-1-1-0-000
+      uuid: mwpp-1-0-0-tcp-c-mwdi-1-1-1-000
     operation-clients:
       own-oam:
         basic:
@@ -265,19 +265,19 @@ clients:
       service:
         basic:
         individual:
-          - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mount-name}
-            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-000
+          - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mountName}
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-1-000
 
-          - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mount-name}/logical-termination-point={uuid}/ltp-augment-1-0:ltp-augment-pac
-            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-201
+          - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/ltp-augment-1-0:ltp-augment-pac
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-1-201
 
           - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-capability
-            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-210
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-1-210
           - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-configuration
-            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-211
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-1-211
           - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-historical-performances
-            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-214
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-1-214
 
           - operation-name: /core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/ethernet-container-2-0:ethernet-container-pac/ethernet-container-historical-performances
-            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-0-22
+            uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-1-224
             
