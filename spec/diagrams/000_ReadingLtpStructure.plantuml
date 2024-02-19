@@ -7,7 +7,7 @@ end title
 
 participant "LinkVis" as LinkVis
 participant "MWPP://v1/provide-historical-pm-data-of-device" as MWPP
-participant "MWDI://core-model-1-4:network-control-domain=cache/control-construct={mount-name}?fields=logical-termination-point(uuid;server-ltp;client-ltp;layer-protocol(local-id;layer-protocol-name))" as ReadingLtpStructure
+participant "MWDI://core-model-1-4:network-control-domain=cache/control-construct={mountMame}?fields=logical-termination-point(uuid;server-ltp;client-ltp;layer-protocol(local-id;layer-protocol-name))" as ReadingLtpStructure
 
 LinkVis -> MWPP: [{MountName,timeStamp}] (apiKeyAuth)
 activate MWPP
