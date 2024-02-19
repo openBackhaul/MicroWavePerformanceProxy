@@ -1,4 +1,4 @@
-@startuml 001_IdentifyingAirandEthernetInterfaces
+@startuml 001_IdentifyingAirAndEthernetInterfaces
 skinparam responseMessageBelowArrow true
 
 title
