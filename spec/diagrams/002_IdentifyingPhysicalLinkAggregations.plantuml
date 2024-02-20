@@ -30,9 +30,9 @@ FOR EACH uuid of Ltps with LayerProtocolName==AIR_LAYER obtained from RequestFor
 	ServerLtp OF **ClientEthernetContainerUuid** = LIST-OF **ServingStructureUuid**	
 
 	FOR EACH **ServingStructureUuid** in LIST-OF **ServingStructureUuid**:	
-    		ServerLtp OF **ServingStructureUuid** = **ServingPhysicalUuid**
+    		ServerLtp OF **ServingStructureUuid** = **Wire/AirInterfaceUuid**
 
-(Result: LIST-OF **ServingPhysicalUuid**)
+(Result: LIST-OF **Wire/AirInterfaceUuid**)
 end note
 
 note over MWPP
