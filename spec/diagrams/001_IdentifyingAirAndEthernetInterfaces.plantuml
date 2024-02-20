@@ -16,8 +16,7 @@ activate MWPP
 LTPs --> MWPP: {uuid, localId, layerProtocolName}
 
 note over MWPP
-For all uuids with layerProtocolName == AIR_LAYER
-or layerProtocolName == ETHERNET_CONTAINER_LAYER
+FOR EACH uuid with (layerProtocolName == ("AIR_LAYER" or "ETHERNET_CONTAINER_LAYER"))
 end note
 
 MWPP -> LtpDesignation: (apiKeyAuth)
