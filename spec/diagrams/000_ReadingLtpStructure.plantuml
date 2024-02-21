@@ -11,7 +11,7 @@ participant "MWDI://core-model-1-4:network-control-domain=cache/control-construc
 
 LinkVis -> MWPP: {MountName,timeStamp}<sub>i</sub> (apiKeyAuth)
 activate MWPP
-MWPP -> ReadingLtpStructure: (apiKeyAuth)
+MWPP -> ReadingLtpStructure: {MountName}(apiKeyAuth)
 ReadingLtpStructure --> MWPP: [{Uuid, LocalId, ServerLtp, ClientLtp, LayerProtocolName}]
 
 @enduml

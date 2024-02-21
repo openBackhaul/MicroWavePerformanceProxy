@@ -15,7 +15,7 @@ activate MWPP
 LTPs --> MWPP: [{uuid, localId, layerProtocolName}]
 
 loop for each Ltp where LayerProtocolName==AIR_LAYER obtained from RequestForProvidingHistoricalPmDataCausesReadingLtpStructure
-    MWPP -> AirInterfaceCapa: {MountName,uuid=AirInterfaceUuid,localId=AirInterfaceLocalId} (apiKeyAuth)
+    MWPP -> AirInterfaceCapa: {MountName,uuid,localId} (apiKeyAuth)
     AirInterfaceCapa --> MWPP: {entire AirInterfaceCapabilities from cache}
 end
 deactivate MWPP

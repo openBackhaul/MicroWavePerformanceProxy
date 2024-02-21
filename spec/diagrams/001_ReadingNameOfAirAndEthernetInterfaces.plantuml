@@ -14,19 +14,20 @@ LinkVis -> MWPP: {MountName, timeStamp}<sub>i</sub> (apiKeyAuth)
 activate MWPP
 LTPs --> MWPP: [{uuid, localId, layerProtocolName}]
 
-loop for each Uuid of Ltp where (layerProtocolName == ("AIR_LAYER" or "ETHERNET_CONTAINER_LAYER"))
+loop for each Ltp where (layerProtocolName == ("AIR_LAYER" or "ETHERNET_CONTAINER_LAYER"))
     
-    MWPP -> LtpDesignation:{MountName, uuid=AirInterface/EthernetContainerUuid, localId=AirInterface/EthernetContainerLocalId} (apiKeyAuth)
+   
+    note over MWPP
+    In following Request,
+	    IF LayerProtocolName == AIR_LAYER :
+	        linkEndPointName = externalLabel
+	    ELSE IF LayerProtocolName == ETHERNET_CONTAINER_LAYER :
+	        interfaceName = originalLtpName
+	end note
+
+    MWPP -> LtpDesignation:{MountName, uuid, localId} (apiKeyAuth)
     LtpDesignation --> MWPP: {externalLabel, originalLtpName}
 
-    note over MWPP
-    From the request above,
-    For Ltps with layerProtocolName == AIR_LAYER:
-    linkEndpointName = externalLabel
-
-    For Ltps with layerProtocolName == ETHERNET_CONTAINER_LAYER:
-    interfaceName = originalLtpName
-    end note
 end
 
 @enduml

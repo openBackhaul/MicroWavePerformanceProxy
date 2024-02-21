@@ -14,7 +14,7 @@ LinkVis -> MWPP: {MountName, timeStamp} (apiKeyAuth)
 activate MWPP
 LTPs --> MWPP: [{uuid, localId, layerProtocolName}]
 loop for each Ltp where LayerProtocolName==AIR_LAYER obtained from RequestForProvidingHistoricalPmDataCausesReadingLtpStructure
-    MWPP -> AirInterfacePm: {MountName,uuid=AirInterfaceUuid,localId=AirInterfaceLocalId} (apiKeyAuth)
+    MWPP -> AirInterfacePm: {MountName,uuid,localId} (apiKeyAuth)
     AirInterfacePm --> MWPP: {entire AirInterfaceHistoricalPerformance from cache}
     note over MWPP
     Keep only entries of performance measurements 

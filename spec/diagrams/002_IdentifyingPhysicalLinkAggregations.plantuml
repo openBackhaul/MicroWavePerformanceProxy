@@ -36,21 +36,19 @@ loop for each uuid of Ltps where LayerProtocolName==AIR_LAYER obtained from Requ
 	(Result: LIST-OF **Wire/AirInterfaceUuid**)
 	end note
 
-	MWPP -> LtpDesignation: {MountName, Uuid=Wire/AirInterfaceUuid} (apiKeyAuth)
-	LtpDesignation --> MWPP: {originalLtpName, externalLabel}
-
 	note over MWPP
-	From the request above,
-
-	For Ltps where LayerProtocolName == WIRE_LAYER :
+	
+	In following Request,
+	IF LayerProtocolName == WIRE_LAYER :
 	interface-name = originalLtpName 
 
-	Alternatively,
-
-	For Ltps where LayerProtocolName == AIR_LAYER :
+	ELSE IF LayerProtocolName == AIR_LAYER :
 	link-id = externalLabel.substring(0,9)
 
 	end note
+
+	MWPP -> LtpDesignation: [{MountName, Uuid=Wire/AirInterfaceUuid}] (apiKeyAuth)
+	LtpDesignation --> MWPP: [{originalLtpName, externalLabel}]
 
 end
 deactivate MWPP

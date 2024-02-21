@@ -14,7 +14,7 @@ LinkVis -> MWPP: {MountName, timeStamp}<sub>i</sub> (apiKeyAuth)
 activate MWPP
 LTPs --> MWPP: [{uuid, localId, layerProtocolName}]
 loop for each Ltp where LayerProtocolName==ETHERNET_CONTAINER_LAYER obtained from RequestForProvidingHistoricalPmDataCausesReadingLtpStructure
-    MWPP -> EthernetPm: {MountName,uuid=EthernetContainerUuid, localId=EthernetContainerLocalId} (apiKeyAuth)
+    MWPP -> EthernetPm: {MountName,uuid, localId} (apiKeyAuth)
     EthernetPm --> MWPP: {entire EthernetContainerPerformances from cache}
 
     note over MWPP
