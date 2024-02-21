@@ -1,0 +1,56 @@
+@startuml 002_IdentifyingPhysicalLinkAggregations
+skinparam responseMessageBelowArrow true
+
+title
+RequestForProvidingHistoricalPmDataCausesIdentifyingPhysicalLinkAggregations
+end title
+
+participant "LinkVis" as LinkVis
+participant "MWPP://v1/provide-historical-pm-data-of-device" as MWPP
+participant "<i>RequestForProvidingHistoricalPmDataCausesReadingLtpStructure</i>" as LTPs
+participant "MWDI://core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/\nltp-augment-1-0:ltp-augment-pac?fields=(original-ltp-name;external-label)" as LtpDesignation
+
+LinkVis -> MWPP: {MountName, timeStamp}<sub>i</sub> (apiKeyAuth)
+activate MWPP
+
+LTPs --> MWPP: [{Uuid, LocalId, ServerLtp, ClientLtp, LayerProtocolName}]
+
+loop for each uuid of Ltps where LayerProtocolName==AIR_LAYER obtained from RequestForProvidingHistoricalPmDataCausesReadingLtpStructure
+
+	note over MWPP
+
+	Starting from an AirInterfaceUuid, navigate recursively upwards thru the hierarchy of client ltps up to the associated EthernetContainerUuid:
+	AirInterface -> HybridMWStructure/PureEthernetStructure -> EthernetContainer
+	Then from this EthernetContainerUuid, navigate downwards thru the hierarchy of server ltps, in order to determine 
+	all the AirInterfaces/WireInterfaces that (also) point to this EthernetContainer
+	EthernetContainer ->List-of HybridMWStructure/PureEthernetStructure -> AirInterface/WireInterface
+	As follows:
+
+		ClientLtp OF **AirInterfaceUuid** = **ClientStructureUuid** 
+		ClientLtp OF **ClientStructureUuid** = **ClientEthernetContainerUuid**
+		ServerLtp OF **ClientEthernetContainerUuid** = LIST-OF **ServingStructureUuid**	
+
+		FOR EACH **ServingStructureUuid** in LIST-OF **ServingStructureUuid**:	
+				ServerLtp OF **ServingStructureUuid** = **Wire/AirInterfaceUuid**
+
+	(Result: LIST-OF **Wire/AirInterfaceUuid**)
+	end note
+
+	note over MWPP
+	
+	In following Request,
+	IF LayerProtocolName == WIRE_LAYER :
+	interface-name = originalLtpName 
+
+	ELSE IF LayerProtocolName == AIR_LAYER :
+	link-id = externalLabel.substring(0,9)
+
+	end note
+
+	MWPP -> LtpDesignation: [{MountName, Uuid=Wire/AirInterfaceUuid}] (apiKeyAuth)
+	LtpDesignation --> MWPP: [{originalLtpName, externalLabel}]
+
+end
+deactivate MWPP
+
+@enduml
