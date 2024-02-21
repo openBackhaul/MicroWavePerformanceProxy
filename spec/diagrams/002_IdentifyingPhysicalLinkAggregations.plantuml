@@ -10,48 +10,49 @@ participant "MWPP://v1/provide-historical-pm-data-of-device" as MWPP
 participant "<i>RequestForProvidingHistoricalPmDataCausesReadingLtpStructure</i>" as LTPs
 participant "MWDI://core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/\nltp-augment-1-0:ltp-augment-pac?fields=(original-ltp-name;external-label)" as LtpDesignation
 
-LinkVis -> MWPP: [{MountName, timeStamp}] (apiKeyAuth)
+LinkVis -> MWPP: {MountName, timeStamp}<sub>i</sub> (apiKeyAuth)
 activate MWPP
 
-LTPs --> MWPP: {Uuid, LocalId, ServerLtp, ClientLtp, LayerProtocolName}
+LTPs --> MWPP: [{Uuid, LocalId, ServerLtp, ClientLtp, LayerProtocolName}]
 
-note over MWPP
+loop for each uuid of Ltps where LayerProtocolName==AIR_LAYER obtained from RequestForProvidingHistoricalPmDataCausesReadingLtpStructure
 
-Starting from an AirInterfaceUuid, navigate recursively thru the hierarchy of client ltps up to the associated EthernetContainerUuid:
-AirInterface -> HybridMWStructure/PureEthernetStructure -> EthernetContainer
-Then from this EthernetContainerUuid, navigate backwards thru the hierarchy of server ltps, in order to determine all the AirInterfaces/WireInterfaces that (also) point to this EthernetContainer
-EthernetContainer ->List-of HybridMWStructure/PureEthernetStructure -> AirInterface/WireInterface
-As follows:
+	note over MWPP
 
-FOR EACH uuid of Ltps with LayerProtocolName==AIR_LAYER obtained from RequestForProvidingHistoricalPmDataCausesReadingLtpStructure,
+	Starting from an AirInterfaceUuid, navigate recursively upwards thru the hierarchy of client ltps up to the associated EthernetContainerUuid:
+	AirInterface -> HybridMWStructure/PureEthernetStructure -> EthernetContainer
+	Then from this EthernetContainerUuid, navigate downwards thru the hierarchy of server ltps, in order to determine 
+	all the AirInterfaces/WireInterfaces that (also) point to this EthernetContainer
+	EthernetContainer ->List-of HybridMWStructure/PureEthernetStructure -> AirInterface/WireInterface
+	As follows:
 
-	ClientLtp OF **AirInterfaceUuid** = **ClientStructureUuid** 
-	ClientLtp OF **ClientStructureUuid** = **ClientEthernetContainerUuid**
-	ServerLtp OF **ClientEthernetContainerUuid** = LIST-OF **ServingStructureUuid**	
+		ClientLtp OF **AirInterfaceUuid** = **ClientStructureUuid** 
+		ClientLtp OF **ClientStructureUuid** = **ClientEthernetContainerUuid**
+		ServerLtp OF **ClientEthernetContainerUuid** = LIST-OF **ServingStructureUuid**	
 
-	FOR EACH **ServingStructureUuid** in LIST-OF **ServingStructureUuid**:	
-    		ServerLtp OF **ServingStructureUuid** = **Wire/AirInterfaceUuid**
+		FOR EACH **ServingStructureUuid** in LIST-OF **ServingStructureUuid**:	
+				ServerLtp OF **ServingStructureUuid** = **Wire/AirInterfaceUuid**
 
-(Result: LIST-OF **Wire/AirInterfaceUuid**)
-end note
+	(Result: LIST-OF **Wire/AirInterfaceUuid**)
+	end note
 
-note over MWPP
-In the following request,
+	MWPP -> LtpDesignation: {MountName, Uuid=Wire/AirInterfaceUuid} (apiKeyAuth)
+	LtpDesignation --> MWPP: {originalLtpName, externalLabel}
 
-For each ServingPhysicalLtp where LayerProtocolName == WIRE_LAYER :
-interface-name = originalLtpName 
+	note over MWPP
+	From the request above,
 
-Alternatively,
+	For Ltps where LayerProtocolName == WIRE_LAYER :
+	interface-name = originalLtpName 
 
-For each ServingPhysicalLtp where LayerProtocol.LayerProtocolName == AIR_LAYER :
-link-id = externalLabel.substring(0,9)
+	Alternatively,
 
-end note
+	For Ltps where LayerProtocolName == AIR_LAYER :
+	link-id = externalLabel.substring(0,9)
 
+	end note
 
-MWPP -> LtpDesignation: {MountName, Uuid} (apiKeyAuth)
-LtpDesignation --> MWPP: {originalLtpName, externalLabel}
-
+end
 deactivate MWPP
 
 @enduml

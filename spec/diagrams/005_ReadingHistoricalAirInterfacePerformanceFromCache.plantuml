@@ -7,22 +7,25 @@ end title
 
 participant "LinkVis" as LinkVis
 participant "MWPP://v1/provide-historical-pm-data-of-device" as MWPP
+participant "<i>RequestForProvidingHistoricalPmDataCausesReadingLtpStructure</i>" as LTPs
 participant "MWDI://core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-historical-performances" as AirInterfacePm
 
-LinkVis -> MWPP: [{MountName, timeStamp}] (apiKeyAuth)
+LinkVis -> MWPP: {MountName, timeStamp} (apiKeyAuth)
 activate MWPP
+LTPs --> MWPP: [{uuid, localId, layerProtocolName}]
+loop for each Ltp where LayerProtocolName==AIR_LAYER obtained from RequestForProvidingHistoricalPmDataCausesReadingLtpStructure
+    MWPP -> AirInterfacePm: {MountName,uuid=AirInterfaceUuid,localId=AirInterfaceLocalId} (apiKeyAuth)
+    AirInterfacePm --> MWPP: {entire AirInterfaceHistoricalPerformance from cache}
+    note over MWPP
+    Keep only entries of performance measurements 
+    WHERE
+    granularity-period == TYPE_PERIOD-15-MIN
+    AND
+    period-end-time > timeStamp
+    Discard the rest
+    end note
 
-MWPP -> AirInterfacePm: {with uuids and localIds of the AirInterfaces from RequestForProvidingHistoricalPmDataCausesIdentifyingAirandEthernetInterfaces} (apiKeyAuth)
-
-note over MWPP
-For all entries of performance measurements 
-WHERE
-granularity-period == TYPE_PERIOD-15-MIN
-AND
-period-end-time > timeStamp
-end note
-
-AirInterfacePm --> MWPP: {entire AirInterfacePerformances from cache}
+end
 
 deactivate MWPP
 

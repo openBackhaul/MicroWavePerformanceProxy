@@ -1,0 +1,29 @@
+@startuml 999_GlobalMwPerformanceProxy
+skinparam responseMessageBelowArrow true
+
+title
+GlobalMwPerformanceProxy
+end title
+
+participant "LinkVis" as LinkVis
+participant "MWPP://v1/provide-historical-pm-data-of-device" as MWPP
+participant "<i>RequestForProvidingHistoricalPmDataCausesReadingNameOfAirAndEthernetInterfaces</i>" as Names
+participant "<i>RequestForProvidingHistoricalPmDataCausesIdentifyingPhysicalLinkAggregations</i>" as PhysicalAggregations
+participant "<i>RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache</i>" as AirInterfaceConfig
+participant "<i>RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache</i>" as AirInterfaceCapa
+participant "<i>RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache</i>" as AirInterfacePm
+participant "<i>RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache</i>" as EthernetPm
+
+LinkVis -> MWPP: [{MountName, timeStamp}<sub>i</sub> (apiKeyAuth)]
+activate MWPP
+loop for each i-th pair {MountName, timeStamp}
+    Names --> MWPP: [{externalLabel/originalLtpName}]
+    PhysicalAggregations--> MWPP: [{externalLabel/originalLtpName}]
+    AirInterfaceConfig --> MWPP: [{atpc-is-on, transmission-mode-min, transmission-mode-max}]
+    AirInterfaceCapa --> MWPP: [{entire AirInterfaceCapabilities from cache}]
+    AirInterfacePm --> MWPP: [{entire AirInterfaceHistoricalPerformance from cache}]
+    EthernetPm --> MWPP: [{entire EthernetContainerPerformances from cache}]
+end
+deactivate MWPP
+
+@enduml
