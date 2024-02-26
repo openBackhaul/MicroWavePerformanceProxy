@@ -465,7 +465,7 @@ forwardings:
     consequent-requests:
       - client-name: MicroWaveDeviceInventory://core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-configuration?fields=atpc-is-on;transmission-mode-min;transmission-mode-max
         uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-1-211
-    
+
   - forwarding-name: RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache
     uuid: mwpp-1-0-0-op-fc-is-004
     forwarding-type: InvariantProcessSnippet
