@@ -27,21 +27,6 @@ profile-instances:
     configuration:
       consequent-operation-reference: '/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-s-bs-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name'
 
-  - profile-name: 'ActionProfile'
-    uuid: 'mwpp-1-0-0-action-p-???'
-    capability:
-      operation-name: ## TODO: Add generic representation operation that shall result in a new button and potentially new input fields
-      label: ## TODO: Add label of the new button
-      input-value-list:
-        - field-name: ## TODO: Potentially add label of a field for providing input to the request that gets called by pushing the button
-          unit: ## TODO: Potentially add unit that shall be represented aside the input field
-        ## TODO: Potentially add further input fields
-      display-in-new-browser-window: ## TODO: Set on true, if result of pushing the button has to be represented in a new browser window
-    configuration:
-      consequent-operation-reference: ## TODO: Reference operation that shall be used, as soon as button gets pushed
-
-  ## TODO: Potentially add further instances of ActionProfile
-
 
   - profile-name: 'GenericResponseProfile'
     uuid: 'mwpp-1-0-0-response-p-000'
@@ -123,54 +108,51 @@ profile-instances:
     configuration:
       value-reference: '/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=0/changes'
 
-  - profile-name: 'GenericResponseProfile'
-    uuid: 'mwpp-1-0-0-response-p-???'
+  - profile-name: 'StringProfile'
+    uuid: 'mwpp-1-0-0-string-p-000'
     capability:
-      operation-name: ## TODO: Add generic representation operation that shall provide this response
-      static-field-name: ## TODO: Add the concrete name of the field as it shall be respresented in the GUI EXOR a reference from which the name of the field shall be taken. ...
-      field-name-reference: ## TODO: ... Delete either the static-field-name or the field-name-reference attribute from the Instance of GenericResponseProfile.
-      description: ## TODO: Add some description for your own reference
-      datatype: ## TODO: Add the datatype of the value
+      string-name: 'RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure'
     configuration:
-      static-value: ## TODO: Add the current, concrete value of the field EXOR a reference from which the field shall be filled. ...
-      value-reference: ## TODO: ... Delete either the static-value or the reference attribute from the Instance of GenericResponseProfile.
-
-  ## TODO: Potentially add further instances of GenericResponseProfile (e.g. to represent further release in the history)
-
-
-  - profile-name: 'FileProfile'
-    uuid: 'mwpp-1-0-0-file-p-???'
-    capability:
-      file-identifier: ## TODO: Add invariant identifier of the referenced file
-      file-description: ## TODO: Add a description of the content of the referenced file
-    configuration:
-      file-path: ## TODO: Add file name, like e.g. '../application-data/application-data.json'
-      operation: ## TODO: Choose from read/write/off
-
-  ## TODO: Potentially add further instances of FileProfile
-
-
-  - profile-name: 'IntegerProfile'
-    uuid: 'mwpp-1-0-0-integer-p-???'
-    capability:
-      integer-name: ## TODO: Add name of the Integer attribute
-      purpose: ## TODO: Potentially add description of the Integer attribute
-      unit: ## TODO: Potentially add unit of the Integer attribute
-      minimum: ## TODO: Potentially add minimum value that is to be accepted, while configuration
-      maximum: ## TODO: Potentially add maximum value that is to be accepted, while configuration
-    configuration:
-      integer-value: ## TODO: Add current value of the attribute
-
-  ## TODO: Potentially add further instances of IntegerProfile
-
+      string-value: 'logical-termination-point(uuid;server-ltp;client-ltp;layer-protocol(local-id;layer-protocol-name))'
 
   - profile-name: 'StringProfile'
-    uuid: 'mwpp-1-0-0-string-p-???'
+    uuid: 'mwpp-1-0-0-string-p-001'
     capability:
-      string-name: ## TODO: Add name of the String attribute
-      enumeration: ## TODO: Potentially add a set of allowed values in cornered brackets
-      pattern: ## TODO: Potentially add a regex for validating configuration values
+      string-name: 'RequestForProvidingHistoricalPmDataCausesReadingNameOfAirAndEthernetInterfaces.LtpDesignation'
     configuration:
-      string-value: ## TODO: Add current value of the attribute
+      string-value: 'external-label;original-ltp-name'
 
-  ## TODO: Potentially add further instances of StringProfile
+  - profile-name: 'StringProfile'
+    uuid: 'mwpp-1-0-0-string-p-002'
+    capability:
+      string-name: 'RequestForProvidingHistoricalPmDataCausesIdentifyingPhysicalLinkAggregations.LtpDesignation'
+    configuration:
+      string-value: 'external-label;original-ltp-name'
+
+  - profile-name: 'StringProfile'
+    uuid: 'mwpp-1-0-0-string-p-003'
+    capability:
+      string-name: 'RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.ConfigurationsFromCache'
+    configuration:
+      string-value: 'atpc-is-on;transmission-mode-min;transmission-mode-max'
+
+  - profile-name: 'StringProfile'
+    uuid: 'mwpp-1-0-0-string-p-004'
+    capability:
+      string-name: 'RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache'
+    configuration:
+      string-value: ''
+
+  - profile-name: 'StringProfile'
+    uuid: 'mwpp-1-0-0-string-p-005'
+    capability:
+      string-name: 'RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.HistoricalAirInterfacePerformanceFromCache'
+    configuration:
+      string-value: ''
+
+  - profile-name: 'StringProfile'
+    uuid: 'mwpp-1-0-0-string-p-006'
+    capability:
+      string-name: 'RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.HistoricalEthernetContainerPerformanceFromCache'
+    configuration:
+      string-value: ''
