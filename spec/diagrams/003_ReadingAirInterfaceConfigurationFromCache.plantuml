@@ -8,7 +8,7 @@ end title
 participant "LinkVis" as LinkVis
 participant "MWPP://v1/provide-historical-pm-data-of-device" as MWPP
 participant "<i>RequestForProvidingHistoricalPmDataCausesReadingLtpStructure</i>" as LTPs
-participant "MWDI://core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-configuration\n?fields=interface-kind?fields=atpc-is-on;transmission-mode-min;transmission-mode-max" as AirInterfaceConfig
+participant "MWDI://core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-configuration\n?fields=atpc-is-on;transmission-mode-min;transmission-mode-max" as AirInterfaceConfig
 
 LinkVis -> MWPP: {MountName, timeStamp}<sub>i</sub> (apiKeyAuth)
 activate MWPP
