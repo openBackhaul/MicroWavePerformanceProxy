@@ -8,7 +8,7 @@ end title
 participant "LinkVis" as LinkVis
 participant "MWPP://v1/provide-historical-pm-data-of-device" as MWPP
 participant "<i>RequestForProvidingHistoricalPmDataCausesReadingLtpStructure</i>" as LTPs
-participant "MWDI://core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/\nltp-augment-1-0:ltp-augment-pac?fields=(external-label;original-ltp-name)" as LtpDesignation
+participant "MWDI://core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/\nltp-augment-1-0:ltp-augment-pac?fields=(original-ltp-name;external-label)" as LtpDesignation
 
 LinkVis -> MWPP: {MountName, timeStamp}<sub>i</sub> (apiKeyAuth)
 activate MWPP
@@ -26,7 +26,7 @@ loop for each Ltp where (layerProtocolName == ("AIR_LAYER" or "ETHERNET_CONTAINE
 	end note
 
     MWPP -> LtpDesignation:{MountName, uuid, localId} (apiKeyAuth)
-    LtpDesignation --> MWPP: {externalLabel, originalLtpName}
+    LtpDesignation --> MWPP: {originalLtpName, externalLabel}
 
 end
 

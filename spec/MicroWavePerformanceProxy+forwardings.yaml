@@ -129,6 +129,7 @@ forwardings:
       fc-port-deletion:
       operation-client-deletion:
     initiating-requests:
+      # [all oam requests]
     consequent-requests:
       - client-name: OamLog://v1/record-oam-request
         uuid: mwpp-1-0-0-op-c-bs-ol-2-1-0-000
@@ -150,6 +151,7 @@ forwardings:
       fc-port-deletion:
       operation-client-deletion:
     initiating-requests:
+      # [all oam requests]
     consequent-requests:
       - client-name: AccessAdministration://v1/approve-basic-auth-request
         uuid: mwpp-1-0-0-op-c-bs-aa-2-1-0-000
@@ -243,6 +245,8 @@ forwardings:
         uuid: mwpp-1-0-0-op-s-bm-011
       - server-name: /v1/inquire-basic-auth-approvals
         uuid: mwpp-1-0-0-op-s-bm-012
+      - server-name: /v1/update-client-of-subsequent-release
+        uuid: mwpp-1-0-0-op-s-bm-015
       - server-name: /v1/bequeath-your-data-and-die
         uuid: mwpp-1-0-0-op-s-im-000
     consequent-requests:
@@ -433,7 +437,7 @@ forwardings:
       - server-name: /v1/provide-historical-pm-data-of-device
         uuid: mwpp-1-0-0-op-s-is-000
     consequent-requests:
-      - client-name: MicroWaveDeviceInventory://core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/ltp-augment-1-0:ltp-augment-pac?fields=(external-label;original-ltp-name)
+      - client-name: MicroWaveDeviceInventory://core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/ltp-augment-1-0:ltp-augment-pac?fields=(original-ltp-name;external-label)
         uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-1-201
 
   - forwarding-name: RequestForProvidingHistoricalPmDataCausesIdentifyingPhysicalLinkAggregations
@@ -448,7 +452,7 @@ forwardings:
       - server-name: /v1/provide-historical-pm-data-of-device
         uuid: mwpp-1-0-0-op-s-is-000
     consequent-requests:
-      - client-name: MicroWaveDeviceInventory://core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/ltp-augment-1-0:ltp-augment-pac?fields=(external-label;original-ltp-name)
+      - client-name: MicroWaveDeviceInventory://core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/ltp-augment-1-0:ltp-augment-pac?fields=(original-ltp-name;external-label)
         uuid: mwpp-1-0-0-op-c-is-mwdi-1-1-1-201
 
   - forwarding-name: RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache

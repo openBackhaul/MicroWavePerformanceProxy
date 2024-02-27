@@ -120,14 +120,14 @@ profile-instances:
     capability:
       string-name: 'RequestForProvidingHistoricalPmDataCausesReadingNameOfAirAndEthernetInterfaces.LtpDesignation'
     configuration:
-      string-value: 'external-label;original-ltp-name'
+      string-value: 'original-ltp-name;external-label'
 
   - profile-name: 'StringProfile'
     uuid: 'mwpp-1-0-0-string-p-002'
     capability:
       string-name: 'RequestForProvidingHistoricalPmDataCausesIdentifyingPhysicalLinkAggregations.LtpDesignation'
     configuration:
-      string-value: 'external-label;original-ltp-name'
+      string-value: 'original-ltp-name;external-label'
 
   - profile-name: 'StringProfile'
     uuid: 'mwpp-1-0-0-string-p-003'

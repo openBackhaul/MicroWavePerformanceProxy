@@ -1,4 +1,4 @@
-@startuml 999_GlobalMwPerformanceProxy
+@startuml GlobalMwPerformanceProxy
 skinparam responseMessageBelowArrow true
 
 title
@@ -24,7 +24,7 @@ loop for each i-th pair {MountName, timeStamp}
     AirInterfacePm --> MWPP: [{entire AirInterfaceHistoricalPerformance from cache}]
     EthernetPm --> MWPP: [{entire EthernetContainerPerformances from cache}]
 end
-MWPP --> LinkVis: Collections of identifiers, some configurations \nand latest performance values of every\nAirInterface and EthernetContainer in given\nmounts 
+MWPP --> LinkVis: ResponseBody: [{Link-id, AirInterfaceConfigs, AirInterfaceCapabilities,\n AirInterfaceHistoricalPerformance, EthernetInterfaceName,\n EthernetHistoricalPerformance}] of Ltps in given mounts 
 deactivate MWPP
 
 @enduml
