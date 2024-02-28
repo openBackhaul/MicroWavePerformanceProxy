@@ -14,7 +14,7 @@ participant "<i>RequestForProvidingHistoricalPmDataCauses</i>\n<i>ReadingAirInte
 participant "<i>RequestForProvidingHistoricalPmDataCauses</i>\n<i>ReadingHistoricalAirInterfacePerformanceFromCache</i>" as AirInterfacePm
 participant "<i>RequestForProvidingHistoricalPmDataCauses</i>\n<i>ReadingHistoricalEthernetContainerPerformanceFromCache</i>" as EthernetPm
 
-LinkVis -> MWPP: [{MountName, timeStamp}<sub>i</sub> (apiKeyAuth)]
+LinkVis -> MWPP: [{MountName, timeStamp}<sub>i</sub>] (apiKeyAuth)
 activate MWPP
 loop for each i-th pair {MountName, timeStamp}
     Names --> MWPP: [{externalLabel/originalLtpName}]
