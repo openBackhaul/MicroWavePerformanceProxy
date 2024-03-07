@@ -487,19 +487,24 @@ paths:
                             link-endpoint-id:
                               type: string
                               description: > 
-                                'Identifier of the microwave link endpoint as used in the Telefonica planning tools'
+                                'Identifier of the microwave link endpoint as used in the Telefonica planning tools
+                                from {$RequestForProvidingHistoricalPmDataCausesReadingNameOfAirAndEthernetInterfaces.LtpDesignation.response.body#external-label}'
                             link-id:
                               type: string
                               description: > 
-                                'Identifier of the microwave link as used in the Telefonica planning tools'
+                                'Identifier of the microwave link as used in the Telefonica planning tools.To be obtained by extracting the substring constituted by the 9 first characters
+                                from {$RequestForProvidingHistoricalPmDataCausesReadingNameOfAirAndEthernetInterfaces.LtpDesignation.response.body#external-label}'
                             logical-termination-point-id:
                               type: string
                               description: > 
-                                'Identifier of the microwave link endpoint within the MW SDN domain'
+                                'Identifier of the microwave link endpoint within the MW SDN domain
+                                from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#uuid}'
                             link-aggregation-identifiers:
                               type: array
                               description: >
-                                'Name of the physically aggregated resources, of type AirInterface or WireInterface, that are transporting fragments of the same Ethernet frames'
+                                'Name of the physically aggregated resources, of type AirInterface or WireInterface, that are transporting fragments of the same Ethernet frames
+                                from {$RequestForProvidingHistoricalPmDataCausesIdentifyingPhysicalLinkAggregations.LtpDesignation.response.body#external-label} in case of AirInterface or
+                                from {$RequestForProvidingHistoricalPmDataCausesIdentifyingPhysicalLinkAggregations.LtpDesignation.response.body#original-ltp-name} in case of WireInterface'
                               items:
                                 oneOf:
                                   - description: 'AirInterfaces'
@@ -526,31 +531,42 @@ paths:
                             configured-atpc-is-on:
                               type: boolean
                               description: >
-                                'This configuration value is true, if automatic transmit power control (ATPC) is configured to be switched on'
+                                'This configuration value is true, if automatic transmit power control (ATPC) is configured to be switched on
+                                from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.AirInterfaceConfigurationFromCache.response.body#atpc-is-on}'
                             configured-atpc-threshold-upper:
                               type: integer
                               description: >
-                                'Configured upper automatic transmit power control (ATPC) threshold in dBm'
+                                'Configured upper automatic transmit power control (ATPC) threshold in dBm
+                                from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.AirInterfaceConfigurationFromCache.response.body#atpc-thresh-upper}'
                             configured-atpc-threshold-lower:
                               type: integer
                               description: >
-                                'Configured lower automatic transmit power control (ATPC) threshold in dBm'
+                                'Configured lower automatic transmit power control (ATPC) threshold in dBm
+                                from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.AirInterfaceConfigurationFromCache.response.body#atpc-thresh-lower}'
                             configured-tx-power:
                               type: integer
                               description: >
-                                'Configured transmit power that will be operated in maximum in dBm'
+                                'Configured transmit power that will be operated in maximum in dBm
+                                from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.AirInterfaceConfigurationFromCache.response.body#tx-power}'
                             configured-modulation-minimum:
                               type: object
-                              description: 'Configured minimum modulation scheme'
+                              description:  >
+                               'Configured minimum modulation scheme'
                               properties:
                                 number-of-states:
                                   type: integer
                                   description: >
-                                    'Number of states in the phase diagram (e.g. BPSK->2 or 256QAM->256)'
+                                    'Number of states in the phase diagram (e.g. BPSK->2 or 256QAM->256)
+                                    transmissionModeMin = {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.AirInterfaceConfigurationFromCache.response.body#air-interface-2-0:air-interface-configuration/transmission-mode-min}
+                                    from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/modulation-scheme}
+                                    where {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/transmission-mode-name} == transmissionModeMin'
                                 name-at-lct:
                                   type: string
                                   description: >
-                                    'Name identifying this transmission mode on the graphical user interface of the local craft terminal'
+                                    'Name identifying this transmission mode on the graphical user interface of the local craft terminal
+                                     transmissionModeMin = {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.AirInterfaceConfigurationFromCache.response.body#air-interface-2-0:air-interface-configuration/transmission-mode-min}
+                                    from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/modulation-scheme-name-at-lct}
+                                    where {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/transmission-mode-name} == transmissionModeMin'
                                 configured-capacity-minimum:
                                   type: integer
                                   description: >
@@ -562,11 +578,17 @@ paths:
                                 number-of-states:
                                   type: integer
                                   description: >
-                                    'Number of states in the phase diagram (e.g. BPSK->2 or 256QAM->256)'
+                                    'Number of states in the phase diagram (e.g. BPSK->2 or 256QAM->256)
+                                    transmissionModeMax = {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.AirInterfaceConfigurationFromCache.response.body#air-interface-2-0:air-interface-configuration/transmission-mode-max}
+                                    from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/modulation-scheme}
+                                    where {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/transmission-mode-name} == transmissionModeMax'
                                 name-at-lct:
                                   type: string
                                   description: >
-                                    'Name identifying this transmission mode on the graphical user interface of the local craft terminal'
+                                    'Name identifying this transmission mode on the graphical user interface of the local craft terminal
+                                     transmissionModeMax = {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.AirInterfaceConfigurationFromCache.response.body#air-interface-2-0:air-interface-configuration/transmission-mode-max}
+                                    from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/modulation-scheme-name-at-lct}
+                                    where {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/transmission-mode-name} == transmissionModeMax'
                                 configured-capacity-maximum:
                                     type: integer
                                     description: >
@@ -584,60 +606,74 @@ paths:
                                   - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-UNKNOWN'
                                   - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-NOT_YET_DEFINED'
                                 description: >
-                                  'Time period between reset of the underlying counter'
+                                  'Time period between reset of the underlying counter
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/granularity-period}'
                               period-end-time:
                                 type: string
                                 format: date-time
                                 description: >
-                                  'Time when the counter values have been recorded and the counter reset'
+                                  'Time when the counter values have been recorded and the counter reset
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/period-end-time}'
                               transmit-level-minimum:
                                 type: integer
                                 description: >
-                                  'Minimum transmit power in dBm'
+                                  'Minimum transmit power in dBm
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/tx-level-min}'
                               transmit-level-maximum:
                                 type: integer
                                 description: >
-                                  'Maximum transmit power in dBm'
+                                  'Maximum transmit power in dBm
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/tx-level-max}'
                               transmit-level-average:
                                 type: integer
                                 description: >
-                                  'Averaged transmit power in dBm'
+                                  'Averaged transmit power in dBm
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/tx-level-avg}'
                               receive-level-minimum:
                                 type: integer
                                 description: >
-                                  'Minimum receive level in dBm'
+                                  'Minimum receive level in dBm
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/rx-level-min}'
                               receive-level-maximum:
                                 type: integer
                                 description: >
-                                  'Maximum receive level in dBm'
+                                  'Maximum receive level in dBm
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/rx-level-max}'
                               receive-level-average:
                                 type: integer
                                 description: >
-                                  'Averaged receive level in dBm'
+                                  'Averaged receive level in dBm
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/rx-level-avg}'
                               signal-to-noise-ratio-minimum:
                                 type: integer
                                 description: >
-                                  'Minimum signal to noise + interference ratio (SNIR)'
+                                  'Minimum signal to noise + interference ratio (SNIR)
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/snir-min}'
                               signal-to-noise-ratio-maximum:
                                 type: integer
                                 description: >
-                                  'Maximum signal to noise + interference ratio (SNIR)'
+                                  'Maximum signal to noise + interference ratio (SNIR)
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/snir-max}'
                               signal-to-noise-ratio-average:
                                 type: integer
                                 description: >
-                                  'Averaged signal to noise + interference ratio (SNIR)'
+                                  'Averaged signal to noise + interference ratio (SNIR)
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/snir-avg}'
                               cross-polarization-discrimination-minimum:
                                 type: integer
                                 description: >
-                                  'Minimum cross polarization discrimination (XPD)'
+                                  'Minimum cross polarization discrimination (XPD)
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/xpd-min}'
                               cross-polarization-discrimination-maximum:
                                 type: integer
                                 description: >
-                                  'Maximum cross polarization discrimination (XPD)'
+                                  'Maximum cross polarization discrimination (XPD)
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/xpd-max}'
                               cross-polarization-discrimination-average:
                                 type: integer
                                 description: >
-                                  'Averaged cross polarization discrimination (XPD)'
+                                  'Averaged cross polarization discrimination (XPD)
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/xpd-avg}'
                               operated-transmission-modes-list:
                                 description: 'List of operated transmission modes with respective operation time periods. Only those entries where operation time is greater than 0 seconds shall be listed'
                                 type: array
@@ -646,13 +682,19 @@ paths:
                                   properties:
                                     transmission-mode-name:
                                       type: string
-                                      description: 'Key attribute, name of the transmission mode'
+                                      description: >
+                                        'Key attribute, name of the transmission mode
+                                        from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/time-xstates-list/transmission-mode'}
                                     modulation-scheme-name-at-lct:
                                       type: string
-                                      description: 'Name identifying this transmission mode on the graphical user interface of the local craft terminal'
+                                      description: >
+                                        'Name identifying this transmission mode on the graphical user interface of the local craft terminal
+                                        from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/time-xstates-list/transmission-mode}'
                                     time:
                                       type: integer
-                                      description: 'Sum of all seconds the transmitter operated the transmission mode'
+                                      description: >
+                                        'Name identifying this transmission mode on the graphical user interface of the local craft terminal
+                                        from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/time-xstates-list/time}'
                                     capacity:
                                       type: integer
                                       description: 'Channel capacity in kbps of the modulation scheme. To be left blank'
@@ -662,23 +704,28 @@ paths:
                               errorred-seconds:
                                 type: integer
                                 description: >
-                                  'Number of errored seconds'
+                                  'Number of errored seconds
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/es}'
                               severely-errorred-seconds:
                                 type: integer
                                 description: >
-                                  'Number of severily errored seconds'
+                                  'Number of severily errored seconds
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/ses}'
                               consecutive-severely-errorred-seconds:
                                 type: integer
                                 description: >
-                                  'Number of consecutive severily errored seconds'
+                                  'Number of consecutive severily errored seconds
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/cses}'
                               total-unavailability:
                                 type: integer
                                 description: >
-                                  'Total time of unavailability in seconds'
+                                  'Total time of unavailability in seconds
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/unavailability}'
                               defect-blocks:
                                 type: integer
                                 description: >
-                                  'Total number of blocks that were defect after receiving and could not be corrected by the FEC'
+                                  'Total number of blocks that were defect after receiving and could not be corrected by the FEC
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/defect-blocks-sum}'
                         transmission-mode-list:
                               description: 'List of supported Transmission Modes'
                               type: array
@@ -687,46 +734,74 @@ paths:
                                 properties:
                                   transmission-mode-name:
                                     type: string
-                                    description: 'Key attribute, name of the transmission mode'
+                                    description: >
+                                     'Key attribute, name of the transmission mode
+                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/transmission-mode-name}'
                                   number-of-states:
                                     type: integer
-                                    description: 'Number of states in the phase diagram (e.g. BPSK->2 or 256QAM->256)'
+                                    description: >
+                                     'Number of states in the phase diagram (e.g. BPSK->2 or 256QAM->256)
+                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/modulation-scheme}'
                                   modulation-scheme-name-at-lct:
                                     type: string
-                                    description: 'Name identifying this transmission mode on the graphical user interface of the local craft terminal'
+                                    description: >
+                                     'Name identifying this transmission mode on the graphical user interface of the local craft terminal
+                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/modulation-scheme-name-at-lct}'
                                   channel-bandwidth:
                                     type: integer
-                                    description: 'Bandwidth of the transmit channel in kHz'
+                                    description: >
+                                     'Bandwidth of the transmit channel in kHz
+                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/channel-bandwidth}'
                                   code-rate:
                                     type: integer
-                                    description: 'Code rate of the coding scheme in %'
+                                    description: >
+                                     'Code rate of the coding scheme in %
+                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/code-rate}'
                                   symbol-rate-reduction-factor:
                                     type: integer
-                                    description: 'Reduction factor for the symbol rate. Example: value would be 4 for 1/4BPSK'
+                                    description: >
+                                      'Reduction factor for the symbol rate. Example: value would be 4 for 1/4BPSK
+                                      from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/symbol-rate-reduction-factor}'
                                   transmit-power-minimum:
                                     type: integer
-                                    description: 'Value of the minimum transmit power the modem can operate in dBm'
+                                    description: >
+                                     'Value of the minimum transmit power the modem can operate in dBm
+                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/tx-power-min}'
                                   transmit-power-maximum:
                                     type: integer
-                                    description: 'Value of the maximum transmit power the modem can operate in dBm.'
+                                    description: >
+                                     'Value of the maximum transmit power the modem can operate in dBm
+                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/tx-power-max}'
                                   receive-threshold:
                                     type: integer
-                                    description: 'Value of the receive level required to decode the received signal with a Bit Error Rate of 1e-6 or less'
+                                    description: >
+                                     'Value of the receive level required to decode the received signal with a Bit Error Rate of 1e-6 or less
+                                      from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/rx-threshold'
                                   transmission-mode-rank:
                                     type: integer
-                                    description: 'Rank of the transmission mode as established by the vendor according to the respective payload data rate'
+                                    description: >
+                                     'Rank of the transmission mode as established by the vendor according to the respective payload data rate
+                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/transmission-mode-rank}'
                                   adaptive-modulation-upshift-level:
                                     type: integer
-                                    description: 'Value of the receive level that has to be exceeded to shift into a higher modulation scheme'
+                                    description: >
+                                      'Value of the receive level that has to be exceeded to shift into a higher modulation scheme
+                                      from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/am-upshift-level}'
                                   adaptive-modulation-downshift-level:
                                     type: integer
-                                    description: 'Value of the receive level that has to be exceeded for not shifting into a lower modulation scheme'
+                                    description: >
+                                      'Value of the receive level that has to be exceeded for not shifting into a lower modulation scheme
+                                      from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/am-downshift-level}'
                                   xpic-is-available:
                                     type: boolean
-                                    description: 'In case this transmission mode is capable of XPIC, this attribute shall contain a "true" value. Independent of the actual configuration'
+                                    description: >
+                                      'In case this transmission mode is capable of XPIC, this attribute shall contain a "true" value. Independent of the actual configuration
+                                      from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/xpic-is-avail}'
                                   supported-as-fixed-configuration: 
                                     type: boolean
-                                    description: 'If true, the this transmission mode is available for manual configuration when Adaptive Modulation is switched off'
+                                    description: >
+                                     'If true, the this transmission mode is available for manual configuration when Adaptive Modulation is switched off
+                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/supported-as-fixed-configuration}'
                   ethernet-container-list:
                     description: 'List of ethernet containers found in the given devices'
                     type: array
@@ -760,95 +835,118 @@ paths:
                                 type: string
                                 format: date-time
                                 description: >
-                                  'Time when the counter values have been recorded and the counter reset'
+                                  'Time when the counter values have been recorded and the counter reset
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/period-end-time}'
                               max-bytes-per-second-output:
                                 type: integer
                                 description: >
-                                  'Counts the number of Bytes of Ethernet traffic (before header compression) transmitted within a second and keeps the highest value within the measurement period'
+                                  'Counts the number of Bytes of Ethernet traffic (before header compression) transmitted within a second and keeps the highest value within the measurement period
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/max-bytes-per-second-output}'
                               total-bytes-input:
                                 type: integer
                                 description: >
-                                  'Total number of Bytes of Ethernet traffic (before header compression) received during the measurement period'
+                                  'Total number of Bytes of Ethernet traffic (before header compression) received during the measurement period
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/total-bytes-input}'
                               total-bytes-output:
                                 type: integer
                                 description: >
-                                  'Total number of Bytes of Ethernet traffic (before header compression) transmitted (in direction out of the device) during the measurement period'
+                                  'Total number of Bytes of Ethernet traffic (before header compression) transmitted (in direction out of the device) during the measurement period
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/total-bytes-output}'
                               total-frames-input:
                                 type: integer
                                 description: >
-                                  'The total number of Ethernet frames received at this interface (including those received in error)'
+                                  'The total number of Ethernet frames received at this interface (including those received in error)
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/total-frames-input}'
                               total-frames-output:
                                 type: integer
                                 description: >
-                                  'The total number of Ethernet frames sent at this interface'
+                                  'The total number of Ethernet frames sent at this interface
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/total-frames-output}'
                               forwarded-frames-input:
                                 type: integer
                                 description: >
-                                  'Number of input frames at this interface, for which the device was not their final destination and for which the device attempted to find a route to forward them to that final destination'
+                                  'Number of input frames at this interface, for which the device was not their final destination and for which the device attempted to find a route to forward them to that final destination
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/forwarded-frames-input}'
                               forwarded-frames-output:
                                 type: integer
                                 description: >
-                                  'Number of frames at this interface, for which the device was not their final destination and for which it was successful in finding a path to their final destination'
+                                  'Number of frames at this interface, for which the device was not their final destination and for which it was successful in finding a path to their final destination
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/forwarded-frames-output}'
                               unicast-frames-input:
                                 type: integer
                                 description: >
-                                  'Total number of unicast frames received at this interface'
+                                  'Total number of unicast frames received at this interface
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/unicast-frames-input}'
                               unicast-frames-output:
                                 type: integer
                                 description: >
-                                  'Total number of unicast frames sent at this interface'
+                                  'Total number of unicast frames sent at this interface
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/unicast-frames-output}'
                               multicast-frames-input:
                                 type: integer
                                 description: >
-                                  'Total number of multicast frames received at this interface'
+                                  'Total number of multicast frames received at this interface
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/multicast-frames-input}'
                               multicast-frames-output:
                                 type: integer
                                 description: >
-                                  'Total number of multicast frames sent at this interface'
+                                  'Total number of multicast frames sent at this interface
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/multicast-frames-output}'
                               broadcast-frames-input:
                                 type: integer
                                 description: >
-                                  'Total number of broadcast frames received at this interface'
+                                  'Total number of broadcast frames received at this interface
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/broadcast-frames-input}'
                               broadcast-frames-output:
                                 type: integer
                                 description: >
-                                  'Total number of broadcast frames sent at this interface'
+                                  'Total number of broadcast frames sent at this interface
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/broadcast-frames-output}'
                               fragmented-frames-input:
                                 type: integer
                                 description: >
-                                  'The total number of frames received that were less than 64 octets in length (excluding framing bits but including FCS octets) and had either a bad Frame Check Sequence (FCS) with an integral number of octets (FCS Error) or a bad FCS with a non-integral number of octets (Alignment Error)'
+                                  'The total number of frames received that were less than 64 octets in length (excluding framing bits but including FCS octets) and had either a bad Frame Check Sequence (FCS) with an integral number of octets (FCS Error) or a bad FCS with a non-integral number of octets (Alignment Error)
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/fragmented-frames-input}'
                               errored-frames-input:
                                 type: integer
                                 description: >
-                                  'Total number of errored frames received at this interface'
+                                  'Total number of errored frames received at this interface
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/errored-frames-input}'
                               errored-frames-output:
                                 type: integer
                                 description: >
-                                  'Number of Ethernet frames, which were locally generated and discarded due to errors, including no route found to the destination'
+                                  'Number of Ethernet frames, which were locally generated and discarded due to errors, including no route found to the destination
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/errored-frames-output}'
                               dropped-frames-input:
                                 type: integer
                                 description: >
-                                  'Total number of Ethernet frames dropped at the receiver. The number of input Ethernet frames, for which no problems were encountered to prevent their continued processing, but were discarded (e.g., for lack of buffer space)'
+                                  'Total number of Ethernet frames dropped at the receiver. The number of input Ethernet frames, for which no problems were encountered to prevent their continued processing, but were discarded (e.g., for lack of buffer space)
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/dropped-frames-input}'
                               dropped-frames-output:
                                 type: integer
                                 description: >
-                                  'The number of output Ethernet frames, for which no problem was encountered to prevent their transmission to their destination, but were discarded (e.g., for lack of buffer space)'
+                                  'The number of output Ethernet frames, for which no problem was encountered to prevent their transmission to their destination, but were discarded (e.g., for lack of buffer space)
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/dropped-frames-output}'
                               oversized-frames-ingress:
                                 type: integer
                                 description: >
-                                  'The total number of frames received that were longer than 1518 octets (excluding framing bits, but including FCS octets) and were otherwise well formed'
+                                  'The total number of frames received that were longer than 1518 octets (excluding framing bits, but including FCS octets) and were otherwise well formed
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/oversized-frames-ingress}'
                               undersized-frames-ingress:
                                 type: integer
                                 description: >
-                                  'The total number of frames received that were less than 64 octets long (excluding framing bits, but including FCS octets) and were otherwise well formed'
+                                  'The total number of frames received that were less than 64 octets long (excluding framing bits, but including FCS octets) and were otherwise well formed
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/undersized-frames-ingress}'
                               jabber-frames-ingress:
                                 type: integer
                                 description: >
-                                  'Number of jabber frames received on the interface. Jabber frames are typically defined as oversize frames which also have a bad CRC. Implementations may use slightly different definitions of what constitutes a jabber frame. Often indicative of a NIC hardware problem'
+                                  'Number of jabber frames received on the interface. Jabber frames are typically defined as oversize frames which also have a bad CRC. Implementations may use slightly different definitions of what constitutes a jabber frame. Often indicative of a NIC hardware problem
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/jabber-frames-ingress}'
                               unknown-protocol-frames-input:
                                 type: integer
                                 description: >
-                                  'Total number of received frames that were transporting an unknown protocol'
+                                  'Total number of received frames that were transporting an unknown protocol
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/unknown-protocol-frames-input}'
                 example:
                   air-interface-list:
                     - air-interface-identifiers:
@@ -1620,7 +1718,9 @@ paths:
                     type: string
                     example: 'LTP-MWPS-TTP-1-1'
                   description: >
-                    'The UUID of a LogicalTerminationPoint with LayerProtocolName == 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER' '
+                    'The UUID of a LogicalTerminationPoint that is addressed by the request
+                    from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/uuid}
+                    where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER'
                 - name: local-id
                   in: path
                   required: true
@@ -1628,7 +1728,9 @@ paths:
                     type: string
                     example: 'LP-MWPS-TTP-1-1'
                   description: >
-                    'The Local-ID of the LayerProtocol with LayerProtocolName == 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER' '
+                    'The localID of a LogicalTerminationPoint that is addressed by the request
+                    from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/local-id}
+                    where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER'
                 - name: fields
                   in: query
                   schema:
@@ -1666,7 +1768,7 @@ paths:
                             transmission-mode-min: '0056-QPSK-52680/61762-1'
                             transmission-mode-max: '0056-128QAM-196320/216167-1'
                             tx-power: 10
-                            adaptive-modulation-is-on: true
+                            atpc-is-on: true
                             atpc-thresh-upper: -40
                             atpc-thresh-lower: -45
                   headers:
@@ -1734,7 +1836,9 @@ paths:
                     type: string
                     example: 'LTP-MWPS-TTP-1-1'
                   description: >
-                    'The UUID of a LogicalTerminationPoint with LayerProtocolName == 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER' '
+                    'The UUID of a LogicalTerminationPoint that is addressed by the request
+                    from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/uuid}
+                    where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER'
                 - name: local-id
                   in: path
                   required: true
@@ -1742,7 +1846,9 @@ paths:
                     type: string
                     example: 'LP-MWPS-TTP-1-1'
                   description: >
-                    'The Local-ID of the LayerProtocol with LayerProtocolName == 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER' '
+                    'The localID of a LogicalTerminationPoint that is addressed by the request
+                    from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/local-id}
+                    where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER'
                 - name: fields
                   in: query
                   schema:
@@ -1856,7 +1962,9 @@ paths:
                     type: string
                     example: 'LTP-MWPS-TTP-1-1'
                   description: >
-                    'The UUID of a LogicalTerminationPoint with LayerProtocolName == 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER' '
+                    ''The UUID of a LogicalTerminationPoint that is addressed by the request
+                    from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/uuid}
+                    where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER'
                 - name: local-id
                   in: path
                   required: true
@@ -1864,7 +1972,9 @@ paths:
                     type: string
                     example: 'LP-MWPS-TTP-1-1'
                   description: >
-                    'The Local-ID of the LayerProtocol with LayerProtocolName == 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER' '
+                    'The localID of a LogicalTerminationPoint that is addressed by the request
+                    from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/local-id}
+                    where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER'
                 - name: fields
                   in: query
                   schema:
@@ -2035,7 +2145,9 @@ paths:
                       type: string
                       example: 'LTP-MWPS-TTP-1-1'
                     description: >
-                      'The UUID of a LogicalTerminationPoint with LayerProtocolName == 'ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER' '
+                      'The UUID of a LogicalTerminationPoint that is addressed by the request
+                      from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/uuid}
+                      where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER'
                   - name: local-id
                     in: path
                     required: true
@@ -2043,7 +2155,9 @@ paths:
                       type: string
                       example: 'LP-MWPS-TTP-1-1'
                     description: >
-                      'The Local-ID of the LayerProtocol with LayerProtocolName == 'ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER' '
+                      'The localID of a LogicalTerminationPoint that is addressed by the request
+                      from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/local-id}
+                      where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER'
                   - name: fields
                     in: query
                     schema:
