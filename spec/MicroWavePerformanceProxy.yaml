@@ -269,17 +269,17 @@ paths:
                         example: 'EXPERIMENTAL'
                       description: 'Life cycle state of the consumed service'
                 '400':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '401':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '403':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '404':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '500':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                default:
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '401':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '403':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '404':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '500':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        default:
+          $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesRequestForDeregisteringOfOldRelease:
           url: #[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-ro-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-ro-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-ro-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-ro-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-c-bm-ro-2-1-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
             post:
@@ -438,7 +438,1771 @@ paths:
                 '500':
                   $ref: '#/components/responses/responseForErroredServiceRequests'
                 default:
+                  $ref: '#/components/responses/responseForErroredServiceRequests'  
+  /v1/provide-historical-pm-data-of-device:
+    post:
+      operationId: provideHistoricalPDataOfDevice
+      summary: 'Provides the historical performance data, together with some relevant configurations and capabilities, of air-interfaces and ethernet-containers found in the device'
+      tags:
+        - IndividualServices
+      security:
+        - basicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - mount-name
+                - time-stamp
+              properties:
+                mount-name:
+                  type: string
+                  description: 'Identifier of the device at the Controller'
+                time-stamp:
+                  type: string
+                  format: date-time
+                  description: 'Time when the counter values were recorded and the counter reset. Corresponds to the most recent performance measurement of the device, which has been logged outside the MW SDN Domain'
+              example:
+                mount-name: '513250010'
+                time-stamp: '2024-02-12T00:45:00+01:00'
+      responses:
+        '200':
+          description: 'Performance data provided'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  air-interface-list:
+                    description: 'List of microwave air interfaces found in the given devices'
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        air-interface-identifiers:
+                          type: object
+                          properties:
+                            link-endpoint-id:
+                              type: string
+                              description: > 
+                                'Identifier of the microwave link endpoint as used in the Telefonica planning tools'
+                            link-id:
+                              type: string
+                              description: > 
+                                'Identifier of the microwave link as used in the Telefonica planning tools'
+                            logical-termination-point-id:
+                              type: string
+                              description: > 
+                                'Identifier of the microwave link endpoint within the MW SDN domain'
+                            link-aggregation-identifiers:
+                              type: array
+                              description: >
+                                'Name of the physically aggregated resources, of type AirInterface or WireInterface, that are transporting fragments of the same Ethernet frames'
+                              items:
+                                oneOf:
+                                  - description: 'AirInterfaces'
+                                    type: object
+                                    required:
+                                      - link-id
+                                    properties:
+                                      link-id:
+                                        type: string
+                                        description: >
+                                          'Identifier of the microwave link as used in the Telefonica planing tools'
+                                  - description: 'WireInterface'
+                                    type: object
+                                    required:
+                                      - interface-name
+                                    properties:
+                                      interface-name:
+                                        type: string
+                                        description: >
+                                          'Interface name as it is represented at the vendor's own management interface'
+                        air-interface-configuration: 
+                          type: object
+                          properties: 
+                            configured-atpc-is-on:
+                              type: boolean
+                              description: >
+                                'This configuration value is true, if automatic transmit power control (ATPC) is configured to be switched on'
+                            configured-atpc-threshold-upper:
+                              type: integer
+                              description: >
+                                'Configured upper automatic transmit power control (ATPC) threshold in dBm'
+                            configured-atpc-threshold-lower:
+                              type: integer
+                              description: >
+                                'Configured lower automatic transmit power control (ATPC) threshold in dBm'
+                            configured-tx-power:
+                              type: integer
+                              description: >
+                                'Configured transmit power that will be operated in maximum in dBm'
+                            configured-modulation-minimum:
+                              type: object
+                              description: 'Configured minimum modulation scheme'
+                              properties:
+                                number-of-states:
+                                  type: integer
+                                  description: >
+                                    'Number of states in the phase diagram (e.g. BPSK->2 or 256QAM->256)'
+                                name-at-lct:
+                                  type: string
+                                  description: >
+                                    'Name identifying this transmission mode on the graphical user interface of the local craft terminal'
+                                configured-capacity-minimum:
+                                  type: integer
+                                  description: >
+                                    'Channel capacity in kbps of the configured minimum modulation scheme. To be left blank'
+                            configured-modulation-maximum:
+                              type: object
+                              description: 'Configured maximum modulation scheme'
+                              properties:
+                                number-of-states:
+                                  type: integer
+                                  description: >
+                                    'Number of states in the phase diagram (e.g. BPSK->2 or 256QAM->256)'
+                                name-at-lct:
+                                  type: string
+                                  description: >
+                                    'Name identifying this transmission mode on the graphical user interface of the local craft terminal'
+                                configured-capacity-maximum:
+                                    type: integer
+                                    description: >
+                                      'Channel capacity in kbps of the configured maximum modulation scheme. To be left blank' 
+                        air-interface-performance-measurements-list:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              granularity-period:
+                                type: string
+                                enum: 
+                                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
+                                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-UNKNOWN'
+                                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-NOT_YET_DEFINED'
+                                description: >
+                                  'Time period between reset of the underlying counter'
+                              period-end-time:
+                                type: string
+                                format: date-time
+                                description: >
+                                  'Time when the counter values have been recorded and the counter reset'
+                              transmit-level-minimum:
+                                type: integer
+                                description: >
+                                  'Minimum transmit power in dBm'
+                              transmit-level-maximum:
+                                type: integer
+                                description: >
+                                  'Maximum transmit power in dBm'
+                              transmit-level-average:
+                                type: integer
+                                description: >
+                                  'Averaged transmit power in dBm'
+                              receive-level-minimum:
+                                type: integer
+                                description: >
+                                  'Minimum receive level in dBm'
+                              receive-level-maximum:
+                                type: integer
+                                description: >
+                                  'Maximum receive level in dBm'
+                              receive-level-average:
+                                type: integer
+                                description: >
+                                  'Averaged receive level in dBm'
+                              signal-to-noise-ratio-minimum:
+                                type: integer
+                                description: >
+                                  'Minimum signal to noise + interference ratio (SNIR)'
+                              signal-to-noise-ratio-maximum:
+                                type: integer
+                                description: >
+                                  'Maximum signal to noise + interference ratio (SNIR)'
+                              signal-to-noise-ratio-average:
+                                type: integer
+                                description: >
+                                  'Averaged signal to noise + interference ratio (SNIR)'
+                              cross-polarization-discrimination-minimum:
+                                type: integer
+                                description: >
+                                  'Minimum cross polarization discrimination (XPD)'
+                              cross-polarization-discrimination-maximum:
+                                type: integer
+                                description: >
+                                  'Maximum cross polarization discrimination (XPD)'
+                              cross-polarization-discrimination-average:
+                                type: integer
+                                description: >
+                                  'Averaged cross polarization discrimination (XPD)'
+                              operated-transmission-modes-list:
+                                description: 'List of operated transmission modes with respective operation time periods. Only those entries where operation time is greater than 0 seconds shall be listed'
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    transmission-mode-name:
+                                      type: string
+                                      description: 'Key attribute, name of the transmission mode'
+                                    modulation-scheme-name-at-lct:
+                                      type: string
+                                      description: 'Name identifying this transmission mode on the graphical user interface of the local craft terminal'
+                                    time:
+                                      type: integer
+                                      description: 'Sum of all seconds the transmitter operated the transmission mode'
+                                    capacity:
+                                      type: integer
+                                      description: 'Channel capacity in kbps of the modulation scheme. To be left blank'
+                              interval-capacity:
+                                type: integer
+                                description: 'Channel capacity over the entire performance measurement interval in kbps. Calculated from the capacities of the operated transmission modes, by weighting the duration of each operated mode over the entire measurement period.To be left blank'
+                              errorred-seconds:
+                                type: integer
+                                description: >
+                                  'Number of errored seconds'
+                              severely-errorred-seconds:
+                                type: integer
+                                description: >
+                                  'Number of severily errored seconds'
+                              consecutive-severely-errorred-seconds:
+                                type: integer
+                                description: >
+                                  'Number of consecutive severily errored seconds'
+                              total-unavailability:
+                                type: integer
+                                description: >
+                                  'Total time of unavailability in seconds'
+                              defect-blocks:
+                                type: integer
+                                description: >
+                                  'Total number of blocks that were defect after receiving and could not be corrected by the FEC'
+                        transmission-mode-list:
+                              description: 'List of supported Transmission Modes'
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  transmission-mode-name:
+                                    type: string
+                                    description: 'Key attribute, name of the transmission mode'
+                                  number-of-states:
+                                    type: integer
+                                    description: 'Number of states in the phase diagram (e.g. BPSK->2 or 256QAM->256)'
+                                  modulation-scheme-name-at-lct:
+                                    type: string
+                                    description: 'Name identifying this transmission mode on the graphical user interface of the local craft terminal'
+                                  channel-bandwidth:
+                                    type: integer
+                                    description: 'Bandwidth of the transmit channel in kHz'
+                                  code-rate:
+                                    type: integer
+                                    description: 'Code rate of the coding scheme in %'
+                                  symbol-rate-reduction-factor:
+                                    type: integer
+                                    description: 'Reduction factor for the symbol rate. Example: value would be 4 for 1/4BPSK'
+                                  transmit-power-minimum:
+                                    type: integer
+                                    description: 'Value of the minimum transmit power the modem can operate in dBm'
+                                  transmit-power-maximum:
+                                    type: integer
+                                    description: 'Value of the maximum transmit power the modem can operate in dBm.'
+                                  receive-threshold:
+                                    type: integer
+                                    description: 'Value of the receive level required to decode the received signal with a Bit Error Rate of 1e-6 or less'
+                                  transmission-mode-rank:
+                                    type: integer
+                                    description: 'Rank of the transmission mode as established by the vendor according to the respective payload data rate'
+                                  adaptive-modulation-upshift-level:
+                                    type: integer
+                                    description: 'Value of the receive level that has to be exceeded to shift into a higher modulation scheme'
+                                  adaptive-modulation-downshift-level:
+                                    type: integer
+                                    description: 'Value of the receive level that has to be exceeded for not shifting into a lower modulation scheme'
+                                  xpic-is-available:
+                                    type: boolean
+                                    description: 'In case this transmission mode is capable of XPIC, this attribute shall contain a "true" value. Independent of the actual configuration'
+                                  supported-as-fixed-configuration: 
+                                    type: boolean
+                                    description: 'If true, the this transmission mode is available for manual configuration when Adaptive Modulation is switched off'
+                  ethernet-container-list:
+                    description: 'List of ethernet containers found in the given devices'
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ethernet-container-identifiers:
+                          type: object
+                          properties:
+                            interface-name:
+                              type: string
+                              description: > 
+                                'Interface name of the EthernetContainer as it is represented at the vendors own management interface, e.g. LAN 1/6/6'                      
+                            logical-termination-point-id:
+                              type: string
+                              description: > 
+                                'Identifier of the ethernet container within the MW SDN domain' 
+                        ethernet-container-performance-measurements-list:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              granularity-period: 
+                                type: string
+                                enum: 
+                                  - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                                  - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
+                                  - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-UNKNOWN'
+                                  - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-NOT_YET_DEFINED'
+                              period-end-time:
+                                type: string
+                                format: date-time
+                                description: >
+                                  'Time when the counter values have been recorded and the counter reset'
+                              max-bytes-per-second-output:
+                                type: integer
+                                description: >
+                                  'Counts the number of Bytes of Ethernet traffic (before header compression) transmitted within a second and keeps the highest value within the measurement period'
+                              total-bytes-input:
+                                type: integer
+                                description: >
+                                  'Total number of Bytes of Ethernet traffic (before header compression) received during the measurement period'
+                              total-bytes-output:
+                                type: integer
+                                description: >
+                                  'Total number of Bytes of Ethernet traffic (before header compression) transmitted (in direction out of the device) during the measurement period'
+                              total-frames-input:
+                                type: integer
+                                description: >
+                                  'The total number of Ethernet frames received at this interface (including those received in error)'
+                              total-frames-output:
+                                type: integer
+                                description: >
+                                  'The total number of Ethernet frames sent at this interface'
+                              forwarded-frames-input:
+                                type: integer
+                                description: >
+                                  'Number of input frames at this interface, for which the device was not their final destination and for which the device attempted to find a route to forward them to that final destination'
+                              forwarded-frames-output:
+                                type: integer
+                                description: >
+                                  'Number of frames at this interface, for which the device was not their final destination and for which it was successful in finding a path to their final destination'
+                              unicast-frames-input:
+                                type: integer
+                                description: >
+                                  'Total number of unicast frames received at this interface'
+                              unicast-frames-output:
+                                type: integer
+                                description: >
+                                  'Total number of unicast frames sent at this interface'
+                              multicast-frames-input:
+                                type: integer
+                                description: >
+                                  'Total number of multicast frames received at this interface'
+                              multicast-frames-output:
+                                type: integer
+                                description: >
+                                  'Total number of multicast frames sent at this interface'
+                              broadcast-frames-input:
+                                type: integer
+                                description: >
+                                  'Total number of broadcast frames received at this interface'
+                              broadcast-frames-output:
+                                type: integer
+                                description: >
+                                  'Total number of broadcast frames sent at this interface'
+                              fragmented-frames-input:
+                                type: integer
+                                description: >
+                                  'The total number of frames received that were less than 64 octets in length (excluding framing bits but including FCS octets) and had either a bad Frame Check Sequence (FCS) with an integral number of octets (FCS Error) or a bad FCS with a non-integral number of octets (Alignment Error)'
+                              errored-frames-input:
+                                type: integer
+                                description: >
+                                  'Total number of errored frames received at this interface'
+                              errored-frames-output:
+                                type: integer
+                                description: >
+                                  'Number of Ethernet frames, which were locally generated and discarded due to errors, including no route found to the destination'
+                              dropped-frames-input:
+                                type: integer
+                                description: >
+                                  'Total number of Ethernet frames dropped at the receiver. The number of input Ethernet frames, for which no problems were encountered to prevent their continued processing, but were discarded (e.g., for lack of buffer space)'
+                              dropped-frames-output:
+                                type: integer
+                                description: >
+                                  'The number of output Ethernet frames, for which no problem was encountered to prevent their transmission to their destination, but were discarded (e.g., for lack of buffer space)'
+                              oversized-frames-ingress:
+                                type: integer
+                                description: >
+                                  'The total number of frames received that were longer than 1518 octets (excluding framing bits, but including FCS octets) and were otherwise well formed'
+                              undersized-frames-ingress:
+                                type: integer
+                                description: >
+                                  'The total number of frames received that were less than 64 octets long (excluding framing bits, but including FCS octets) and were otherwise well formed'
+                              jabber-frames-ingress:
+                                type: integer
+                                description: >
+                                  'Number of jabber frames received on the interface. Jabber frames are typically defined as oversize frames which also have a bad CRC. Implementations may use slightly different definitions of what constitutes a jabber frame. Often indicative of a NIC hardware problem'
+                              unknown-protocol-frames-input:
+                                type: integer
+                                description: >
+                                  'Total number of received frames that were transporting an unknown protocol'
+                example:
+                  air-interface-list:
+                    - air-interface-identifiers:
+                        link-endpoint-id:
+                        link-id:
+                        logical-termination-point-id:
+                        link-aggregation-identifiers:
+                          - link-id:
+                          - link-id:
+                      air-interface-configuration:
+                        configured-atpc-is-on:
+                        configured-atpc-threshold-upper:
+                        onfigured-atpc-threshold-lower:
+                        configured-atpc-tx-power-min:
+                        configured-tx-power:
+                        configured-modulation-minimum:
+                          number-of-states:
+                          name-at-lct:
+                          configured-capacity-minimum:
+                        configured-modulation-maximum:
+                          number-of-states:
+                          name-at-lct:
+                          configured-capacity-maximum:
+                      air-interface-performance-measurements-list:
+                        - granularity-period:
+                          period-end-time:
+                          transmit-level-minimum:
+                          transmit-level-maximum:
+                          transmit-level-average:
+                          receive-level-minimum:
+                          receive-level-maximum:
+                          receive-level-average:
+                          signal-to-noise-ratio-minimum:
+                          signal-to-noise-ratio-maximum:
+                          signal-to-noise-ratio-average:
+                          cross-polarization-discrimination-minimum:
+                          cross-polarization-discrimination-maximum:
+                          cross-polarization-discrimination-average:
+                          operated-transmission-modes-list:
+                          interval-capacity:
+                            - transmission-mode-name:
+                              modulation-scheme-name-at-lct:
+                              time:
+                              capacity:
+                              errorred-seconds:
+                              severely-errorred-seconds:
+                              consecutive-severely-errorred-seconds:
+                              total-unavailability:
+                              defect-blocks:
+                            - transmission-mode-name:
+                              modulation-scheme-name-at-lct:
+                              time:
+                              capacity:
+                              errorred-seconds:
+                              severely-errorred-seconds:
+                              consecutive-severely-errorred-seconds:
+                              total-unavailability:
+                              defect-blocks:
+                        - granularity-period:
+                          period-end-time:
+                          transmit-level-minimum:
+                          transmit-level-maximum:
+                          transmit-level-average:
+                          receive-level-minimum:
+                          receive-level-maximum:
+                          receive-level-average:
+                          signal-to-noise-ratio-minimum:
+                          signal-to-noise-ratio-maximum:
+                          signal-to-noise-ratio-average:
+                          cross-polarization-discrimination-minimum:
+                          cross-polarization-discrimination-maximum:
+                          cross-polarization-discrimination-average:
+                          operated-transmission-modes-list:
+                            - transmission-mode-name:
+                              modulation-scheme-name-at-lct:
+                              time:
+                              capacity:                              
+                              errorred-seconds:
+                              severely-errorred-seconds:
+                              consecutive-severely-errorred-seconds:
+                              total-unavailability:
+                              defect-blocks:
+                            - transmission-mode-name:
+                              modulation-scheme-name-at-lct:
+                              time:
+                              capacity:
+                              errorred-seconds:
+                              severely-errorred-seconds:
+                              consecutive-severely-errorred-seconds:
+                              total-unavailability:
+                              defect-blocks:
+                          interval-capacity:
+                      transmission-mode-list:
+                        - transmission-mode-name:
+                          number-of-states:
+                          modulation-scheme-name-at-lct:
+                          channel-bandwidth:
+                          code-rate:
+                          symbol-rate-reduction-factor:
+                          transmit-power-minimum:
+                          transmit-power-maximum:
+                          receive-threshold:
+                          transmission-mode-rank:
+                          adaptive-modulation-upshift-level:
+                          adaptive-modulation-downshift-level:
+                          xpic-is-available:
+                          supported-as-fixed-configuration:
+                        - transmission-mode-name:
+                          number-of-states:
+                          modulation-scheme-name-at-lct:
+                          channel-bandwidth:
+                          code-rate:
+                          symbol-rate-reduction-factor:
+                          transmit-power-minimum:
+                          transmit-power-maximum:
+                          receive-threshold:
+                          transmission-mode-rank:
+                          adaptive-modulation-upshift-level:
+                          adaptive-modulation-downshift-level:
+                          xpic-is-available:
+                          supported-as-fixed-configuration:
+                        - transmission-mode-name:
+                          number-of-states:
+                          modulation-scheme-name-at-lct:
+                          channel-bandwidth:
+                          code-rate:
+                          symbol-rate-reduction-factor:
+                          transmit-power-minimum:
+                          transmit-power-maximum:
+                          receive-threshold:
+                          transmission-mode-rank:
+                          adaptive-modulation-upshift-level:
+                          adaptive-modulation-downshift-level:
+                          xpic-is-available:
+                          supported-as-fixed-configuration:
+                    - air-interface-identifiers:
+                        link-endpoint-id:
+                        link-id:
+                        logical-termination-point-id:
+                        link-aggregation-identifiers:
+                          - link-id:
+                          - link-id:
+                      air-interface-configuration:
+                        configured-atpc-is-on:
+                        configured-atpc-threshold-upper:
+                        onfigured-atpc-threshold-lower:
+                        configured-atpc-tx-power-min:
+                        configured-tx-power:
+                        configured-modulation-minimum:
+                          number-of-states:
+                          name-at-lct:
+                          configured-capacity-minimum:
+                        configured-modulation-maximum:
+                          number-of-states:
+                          name-at-lct:
+                          configured-capacity-maximum:
+                      air-interface-performance-measurements-list:
+                        - granularity-period:
+                          period-end-time:
+                          transmit-level-minimum:
+                          transmit-level-maximum:
+                          transmit-level-average:
+                          receive-level-minimum:
+                          receive-level-maximum:
+                          receive-level-average:
+                          signal-to-noise-ratio-minimum:
+                          signal-to-noise-ratio-maximum:
+                          signal-to-noise-ratio-average:
+                          cross-polarization-discrimination-minimum:
+                          cross-polarization-discrimination-maximum:
+                          cross-polarization-discrimination-average:
+                          operated-transmission-modes-list:
+                          interval-capacity:
+                            - transmission-mode-name:
+                              modulation-scheme-name-at-lct:
+                              time:
+                              capacity:
+                              errorred-seconds:
+                              severely-errorred-seconds:
+                              consecutive-severely-errorred-seconds:
+                              total-unavailability:
+                              defect-blocks:
+                            - transmission-mode-name:
+                              modulation-scheme-name-at-lct:
+                              time:
+                              capacity:
+                              errorred-seconds:
+                              severely-errorred-seconds:
+                              consecutive-severely-errorred-seconds:
+                              total-unavailability:
+                              defect-blocks:
+                        - granularity-period:
+                          period-end-time:
+                          transmit-level-minimum:
+                          transmit-level-maximum:
+                          transmit-level-average:
+                          receive-level-minimum:
+                          receive-level-maximum:
+                          receive-level-average:
+                          signal-to-noise-ratio-minimum:
+                          signal-to-noise-ratio-maximum:
+                          signal-to-noise-ratio-average:
+                          cross-polarization-discrimination-minimum:
+                          cross-polarization-discrimination-maximum:
+                          cross-polarization-discrimination-average:
+                          operated-transmission-modes-list:
+                            - transmission-mode-name:
+                              modulation-scheme-name-at-lct:
+                              time:
+                              capacity:                              
+                              errorred-seconds:
+                              severely-errorred-seconds:
+                              consecutive-severely-errorred-seconds:
+                              total-unavailability:
+                              defect-blocks:
+                            - transmission-mode-name:
+                              modulation-scheme-name-at-lct:
+                              time:
+                              capacity:
+                              errorred-seconds:
+                              severely-errorred-seconds:
+                              consecutive-severely-errorred-seconds:
+                              total-unavailability:
+                              defect-blocks:
+                          interval-capacity:
+                      transmission-mode-list:
+                        - transmission-mode-name:
+                          number-of-states:
+                          modulation-scheme-name-at-lct:
+                          channel-bandwidth:
+                          code-rate:
+                          symbol-rate-reduction-factor:
+                          transmit-power-minimum:
+                          transmit-power-maximum:
+                          receive-threshold:
+                          transmission-mode-rank:
+                          adaptive-modulation-upshift-level:
+                          adaptive-modulation-downshift-level:
+                          xpic-is-available:
+                          supported-as-fixed-configuration:
+                        - transmission-mode-name:
+                          number-of-states:
+                          modulation-scheme-name-at-lct:
+                          channel-bandwidth:
+                          code-rate:
+                          symbol-rate-reduction-factor:
+                          transmit-power-minimum:
+                          transmit-power-maximum:
+                          receive-threshold:
+                          transmission-mode-rank:
+                          adaptive-modulation-upshift-level:
+                          adaptive-modulation-downshift-level:
+                          xpic-is-available:
+                          supported-as-fixed-configuration:
+                        - transmission-mode-name:
+                          number-of-states:
+                          modulation-scheme-name-at-lct:
+                          channel-bandwidth:
+                          code-rate:
+                          symbol-rate-reduction-factor:
+                          transmit-power-minimum:
+                          transmit-power-maximum:
+                          receive-threshold:
+                          transmission-mode-rank:
+                          adaptive-modulation-upshift-level:
+                          adaptive-modulation-downshift-level:
+                          xpic-is-available:
+                          supported-as-fixed-configuration: 
+                  ethernet-container-list:
+                    - ethernet-container-identifiers:
+                        interface-name:
+                        logical-termination-point-id:
+                      ethernet-container-performance-measurements-list:
+                        - granularity-period: 
+                          period-end-time:
+                          max-bytes-per-second-output:
+                          total-bytes-input:
+                          total-bytes-output:
+                          total-frames-input:
+                          total-frames-output:
+                          forwarded-frames-input:
+                          forwarded-frames-output:
+                          unicast-frames-input:
+                          unicast-frames-output:
+                          multicast-frames-input:
+                          multicast-frames-output:
+                          broadcast-frames-input:
+                          broadcast-frames-output:
+                          fragmented-frames-input:
+                          errored-frames-input:
+                          errored-frames-output:
+                          dropped-frames-input:
+                          dropped-frames-output:
+                          oversized-frames-ingress:
+                          undersized-frames-ingress:
+                          jabber-frames-ingress:
+                          unknown-protocol-frames-input:
+                        - granularity-period: 
+                          period-end-time:
+                          max-bytes-per-second-output:
+                          total-bytes-input:
+                          total-bytes-output:
+                          total-frames-input:
+                          total-frames-output:
+                          forwarded-frames-input:
+                          forwarded-frames-output:
+                          unicast-frames-input:
+                          unicast-frames-output:
+                          multicast-frames-input:
+                          multicast-frames-output:
+                          broadcast-frames-input:
+                          broadcast-frames-output:
+                          fragmented-frames-input:
+                          errored-frames-input:
+                          errored-frames-output:
+                          dropped-frames-input:
+                          dropped-frames-output:
+                          oversized-frames-ingress:
+                          undersized-frames-ingress:
+                          jabber-frames-ingress:
+                          unknown-protocol-frames-input:
+                    - ethernet-container-identifiers:
+                        interface-name:
+                        logical-termination-point-id:
+                      ethernet-container-performance-measurements-list:
+                        - granularity-period: 
+                          period-end-time:
+                          max-bytes-per-second-output:
+                          total-bytes-input:
+                          total-bytes-output:
+                          total-frames-input:
+                          total-frames-output:
+                          forwarded-frames-input:
+                          forwarded-frames-output:
+                          unicast-frames-input:
+                          unicast-frames-output:
+                          multicast-frames-input:
+                          multicast-frames-output:
+                          broadcast-frames-input:
+                          broadcast-frames-output:
+                          fragmented-frames-input:
+                          errored-frames-input:
+                          errored-frames-output:
+                          dropped-frames-input:
+                          dropped-frames-output:
+                          oversized-frames-ingress:
+                          undersized-frames-ingress:
+                          jabber-frames-ingress:
+                          unknown-protocol-frames-input:
+                        - granularity-period: 
+                          period-end-time:
+                          max-bytes-per-second-output:
+                          total-bytes-input:
+                          total-bytes-output:
+                          total-frames-input:
+                          total-frames-output:
+                          forwarded-frames-input:
+                          forwarded-frames-output:
+                          unicast-frames-input:
+                          unicast-frames-output:
+                          multicast-frames-input:
+                          multicast-frames-output:
+                          broadcast-frames-input:
+                          broadcast-frames-output:
+                          fragmented-frames-input:
+                          errored-frames-input:
+                          errored-frames-output:
+                          dropped-frames-input:
+                          dropped-frames-output:
+                          oversized-frames-ingress:
+                          undersized-frames-ingress:
+                          jabber-frames-ingress:
+                          unknown-protocol-frames-input:
+                        - period-end-time:
+                          max-bytes-per-second-output:
+                          total-bytes-input:
+                          total-bytes-output:
+                          total-frames-input:
+                          total-frames-output:
+                          forwarded-frames-input:
+                          forwarded-frames-output:
+                          unicast-frames-input:
+                          unicast-frames-output:
+                          multicast-frames-input:
+                          multicast-frames-output:
+                          broadcast-frames-input:
+                          broadcast-frames-output:
+                          fragmented-frames-input:
+                          errored-frames-input:
+                          errored-frames-output:
+                          dropped-frames-input:
+                          dropped-frames-output:
+                          oversized-frames-ingress:
+                          undersized-frames-ingress:
+                          jabber-frames-ingress:
+                          unknown-protocol-frames-input:
+          headers:
+              life-cycle-state:
+                schema:
+                  type: string
+                  enum:
+                    - 'EXPERIMENTAL'
+                    - 'OPERATIONAL'
+                    - 'DEPRECATED'
+                    - 'OBSOLETE'
+                    - 'UNKNOWN'
+                    - 'NOT_YET_DEFINED'
+                  example: 'EXPERIMENTAL'
+                description: >
+                    'Life cycle state of the consumed service
+                    find in [/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-s-is-000/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+        '400':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '401':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '403':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '404':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '500':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        default:
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+      callbacks:
+        RequestForProvidingHistoricalPmDataCausesReadingLtpStructure:
+          LtpStructure: #[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-c-is-mwdi-1-1-1-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name] 
+            get:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
+                - name: mount-name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: '222250001'
+                  description: >
+                    'The mount-name of the device that is addressed by this callback
+                    from {$request.body#mount-name}'
+                - name: fields
+                  in: query
+                  required: true
+                  schema:
+                    type: string
+                    example: 'logical-termination-point(uuid;server-ltp;client-ltp;layer-protocol(local-id;layer-protocol-name))'
+                  description: >
+                    'If different from empty string, a fields filter with the following value to be added to the request
+                    from [/core-model-1-4:control-construct/profile-collection/profile=mwpp-1-0-0-string-p-000/string-profile-1-0:string-profile-pac/string-profile-configuration/string-value]'
+              responses:
+                '200':
+                  description: 'ControlConstruct provided from cache'
+                  content:
+                    application/json:
+                      schema:
+                        type: object
+                        properties:
+                          core-model-1-4:control-construct:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                logical-termination-point:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      uuid:
+                                        type: string
+                                      client-ltp:
+                                        type: array
+                                        items:
+                                          type: string
+                                      server-ltp:
+                                        type: array
+                                        items:
+                                          type: string
+                                      layer-protocol:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            local-id:
+                                              type: string
+                                            layer-protocol-name:
+                                              type: string
+                        example:
+                          core-model-1-4:control-construct:
+                            - logical-termination-point:
+                                - uuid: '513250010-PureEthStruc-45743677'
+                                  client-ltp:
+                                    - '513250010-EthContainer-13535345'
+                                  server-ltp:
+                                    - '513250010-AirInterface-34534563'
+                                  layer-protocol:
+                                    - local-id: '45743677'
+                                      layer-protocol-name: 'LAYER_PROTOCOL_NAME_TYPE_PURE_ETHERNET_STRUCTURE_LAYER'
+                                - uuid: '513250010-AirInterface-34534563'
+                                  client-ltp:
+                                    - '513250010-PureEthStruc-45743677'
+                                  server-ltp:
+                                  layer-protocol:
+                                    - local-id: '34534563'
+                                      layer-protocol-name: 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER'
+                  headers:
+                    x-correlator:
+                      schema:
+                        type: string
+                        example: '550e8400-e29b-11d4-a716-446655440000'
+                      description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+                    exec-time:
+                      schema:
+                        type: integer
+                        example: 1100
+                      description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+                    backend-time:
+                      schema:
+                        type: integer
+                        example: 850
+                      description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+                    life-cycle-state:
+                      schema:
+                        type: string
+                        enum:
+                          - 'EXPERIMENTAL'
+                          - 'OPERATIONAL'
+                          - 'DEPRECATED'
+                          - 'OBSOLETE'
+                          - 'UNKNOWN'
+                          - 'NOT_YET_DEFINED'
+                        example: 'EXPERIMENTAL'
+                      description: 'Life cycle state of the consumed service'
+                '400':
                   $ref: '#/components/responses/responseForErroredServiceRequests'
+                '401':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '403':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '404':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '500':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                default:
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+        RequestForProvidingHistoricalPmDataCausesReadingNameOfAirAndEthernetInterfaces:
+          LtpDesignation: #[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-c-is-mwdi-1-1-1-201/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+            get:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
+                - name: mount-name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: '222250001'
+                  description: >
+                    'The mount-name of the device that is addressed by this callback
+                    from {$request.body#mount-name}'
+                - name: uuid
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: 'LTP-MWPS-TTP-1-1'
+                  description: >
+                    'The UUID of the LogicalTerminationPoint that is addressed by the request
+                    from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/uuid}
+                    where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == (air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER OR ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER)'
+                - name: fields
+                  in: query
+                  required: true
+                  schema:
+                    type: string
+                    example: 'original-ltp-name;external-label'
+                  description: >
+                    'If different from empty string, a fields filter with the following value to be added to the request
+                    from [/core-model-1-4:control-construct/profile-collection/profile=mwpp-1-0-0-string-p-001/string-profile-1-0:string-profile-pac/string-profile-configuration/string-value]'
+              responses:
+                '200':
+                  description: 'LtpAugment provided from cache'
+                  content:
+                    application/json:
+                      schema:
+                        type: object
+                        properties:
+                          ltp-augment-1-0:ltp-augment-pac:
+                            type: object
+                            properties:
+                              original-ltp-name:
+                                type: string
+                              external-label:
+                                type: string
+                        example:
+                          ltp-augment-1-0:ltp-augment-pac:
+                            original-ltp-name: 'LAN 1/3/3'
+                            external-label: '513550010B'
+                  headers:
+                    x-correlator:
+                      schema:
+                        type: string
+                        example: '550e8400-e29b-11d4-a716-446655440000'
+                      description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+                    exec-time:
+                      schema:
+                        type: integer
+                        example: 1100
+                      description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+                    backend-time:
+                      schema:
+                        type: integer
+                        example: 850
+                      description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+                    life-cycle-state:
+                      schema:
+                        type: string
+                        enum:
+                          - 'EXPERIMENTAL'
+                          - 'OPERATIONAL'
+                          - 'DEPRECATED'
+                          - 'OBSOLETE'
+                          - 'UNKNOWN'
+                          - 'NOT_YET_DEFINED'
+                        example: 'EXPERIMENTAL'
+                      description: 'Life cycle state of the consumed service'
+                '400':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '401':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '403':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '404':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '500':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                default:
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+        RequestForProvidingHistoricalPmDataCausesIdentifyingPhysicalLinkAggregations:
+          LtpDesignation: #[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-c-is-mwdi-1-1-1-201/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+            get:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
+                - name: mount-name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: '222250301'
+                  description: >
+                    'The mount-name of the device that is addressed by this callback
+                    from {$request.body#mount-name}'
+                - name: uuid
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: 'LTP-MWPS-TTP-1-1'
+                  description: >
+                    'The UUID of the LogicalTerminationPoint with layer protocol Wire/AirInterface that is addressed by the request.
+                    The UUID, which is to be used here, has to be determined by stepping through the hierarchy of LTPs on top of the AirInterface, which is identified
+                    from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/uuid}
+                    where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER
+                    as follows:
+                    ClientLtp OF AirInterfaceUuid = ClientStructureUuid 
+                    ClientLtp OF ClientStructureUuid = ClientEthernetContainerUuid
+                    ServerLtp OF ClientEthernetContainerUuid = LIST-OF ServingStructureUuid
+
+                    FOR EACH ServingStructureUuid in LIST-OF ServingStructureUuid:
+                    ServerLtp OF ServingStructureUuid = Wire/AirInterfaceUuid'
+                - name: fields
+                  in: query
+                  required: true
+                  schema:
+                    type: string
+                    example: 'original-ltp-name;external-label'
+                  description: >
+                    'If different from empty string, a fields filter with the following value to be added to the request
+                    from [/core-model-1-4:control-construct/profile-collection/profile=mwpp-1-0-0-string-p-002/string-profile-1-0:string-profile-pac/string-profile-configuration/string-value]'
+              responses:
+                '200':
+                  description: 'LtpAugment provided from cache'
+                  content:
+                    application/json:
+                      schema:
+                        type: object
+                        properties:
+                          ltp-augment-1-0:ltp-augment-pac:
+                            type: object
+                            properties:
+                              original-ltp-name:
+                                type: string
+                              external-label:
+                                type: string
+                        example:
+                          ltp-augment-1-0:ltp-augment-pac:
+                            original-ltp-name: 'LAN 1/3/3'
+                            external-label: '513550010B'
+                  headers:
+                    x-correlator:
+                      schema:
+                        type: string
+                        example: '550e8400-e29b-11d4-a716-446655440000'
+                      description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+                    exec-time:
+                      schema:
+                        type: integer
+                        example: 1100
+                      description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+                    backend-time:
+                      schema:
+                        type: integer
+                        example: 850
+                      description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+                    life-cycle-state:
+                      schema:
+                        type: string
+                        enum:
+                          - 'EXPERIMENTAL'
+                          - 'OPERATIONAL'
+                          - 'DEPRECATED'
+                          - 'OBSOLETE'
+                          - 'UNKNOWN'
+                          - 'NOT_YET_DEFINED'
+                        example: 'EXPERIMENTAL'
+                      description: 'Life cycle state of the consumed service'
+                '400':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '401':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '403':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '404':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '500':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                default:
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+        RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache:
+          AirInterfaceConfigurationFromCache: #[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-c-is-mwdi-1-1-1-211/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+            get:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
+                - name: mount-name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: '222250001'
+                  description: >
+                    'The mount-name of the device that is addressed by this callback
+                    from {$request.body#mount-name}'
+                - name: uuid
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: 'LTP-MWPS-TTP-1-1'
+                  description: >
+                    'The UUID of a LogicalTerminationPoint with LayerProtocolName == 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER' '
+                - name: local-id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: 'LP-MWPS-TTP-1-1'
+                  description: >
+                    'The Local-ID of the LayerProtocol with LayerProtocolName == 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER' '
+                - name: fields
+                  in: query
+                  schema:
+                    type: string
+                    example: 'atpc-is-on;atpc-thresh-lower;atpc-thresh-upper;tx-power;transmission-mode-min;transmission-mode-max'
+                  description: >
+                    'If different from empty string, a fields filter with the following value to be added to the request
+                    from [/core-model-1-4:control-construct/profile-collection/mwpp-1-0-0-string-p-003/string-profile-1-0:string-profile-pac/string-profile-configuration/string-value]'
+              responses:
+                '200':
+                  description: 'AirInterfaceConfiguration provided from cache'
+                  content:
+                    application/json:
+                      schema:
+                        description: 'Only relevant attributes listed'
+                        type: object
+                        properties:
+                          air-interface-2-0:air-interface-configuration:
+                            type: object
+                            properties:
+                              transmission-mode-min:
+                                type: string
+                              transmission-mode-max:
+                                type: string
+                              tx-power:
+                                type: integer
+                              atpc-is-on:
+                                type: boolean
+                              atpc-thresh-upper:
+                                type: integer
+                              atpc-thresh-lower:
+                                type: integer
+                        example:
+                          air-interface-2-0:air-interface-configuration:
+                            transmission-mode-min: '0056-QPSK-52680/61762-1'
+                            transmission-mode-max: '0056-128QAM-196320/216167-1'
+                            tx-power: 10
+                            adaptive-modulation-is-on: true
+                            atpc-thresh-upper: -40
+                            atpc-thresh-lower: -45
+                  headers:
+                    x-correlator:
+                      schema:
+                        type: string
+                        example: '550e8400-e29b-11d4-a716-446655440000'
+                      description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+                    exec-time:
+                      schema:
+                        type: integer
+                        example: 1100
+                      description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+                    backend-time:
+                      schema:
+                        type: integer
+                        example: 850
+                      description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+                    life-cycle-state:
+                      schema:
+                        type: string
+                        enum:
+                          - 'EXPERIMENTAL'
+                          - 'OPERATIONAL'
+                          - 'DEPRECATED'
+                          - 'OBSOLETE'
+                          - 'UNKNOWN'
+                          - 'NOT_YET_DEFINED'
+                        example: 'EXPERIMENTAL'
+                      description: 'Life cycle state of the consumed service'
+                '400':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '401':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '403':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '404':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '500':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                default:
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+        RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache:
+          CapabilitiesFromCache: #[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-c-is-mwdi-1-1-1-210/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+            get:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
+                - name: mount-name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: '222250001'
+                  description: >
+                    'The mount-name of the device that is addressed by this callback
+                    from {$request.body#mount-name}'
+                - name: uuid
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: 'LTP-MWPS-TTP-1-1'
+                  description: >
+                    'The UUID of a LogicalTerminationPoint with LayerProtocolName == 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER' '
+                - name: local-id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: 'LP-MWPS-TTP-1-1'
+                  description: >
+                    'The Local-ID of the LayerProtocol with LayerProtocolName == 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER' '
+                - name: fields
+                  in: query
+                  schema:
+                    type: string
+                    example: ''
+                  description: >
+                    'If different from empty string, a fields filter with the following value to be added to the request
+                    from [/core-model-1-4:control-construct/profile-collection/profile=mwpp-1-0-0-string-p-004/string-profile-1-0:string-profile-pac/string-profile-configuration/string-value]'
+              responses:
+                '200':
+                  description: 'AirInterfaceCapability provided from cache'
+                  content:
+                    application/json:
+                      schema:
+                        description: 'Only relevant attributes listed'
+                        type: object
+                        properties:
+                          air-interface-2-0:air-interface-capability:
+                            type: object
+                            properties:
+                              transmission-mode-list:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    transmission-mode-name:
+                                      type: string
+                                      description: 'Key attribute, name of the transmission mode'
+                                    channel-bandwidth:
+                                      type: integer
+                                      description: 'Bandwidth of the transmit channel in kHz'
+                                    modulation-scheme:
+                                      type: integer
+                                      description: 'Number of states in the phase diagram, e.g. BPSK->2 or 256QAM->256'
+                                    modulation-scheme-name-at-lct:
+                                      type: string
+                                      description: 'Name identifying this transmission mode on the graphical user interface of the local craft terminal'
+                        example:
+                          air-interface-2-0:air-interface-capability:
+                            transmission-mode-list:
+                              - transmission-mode-name: '0028-4QAM-188/204-1'
+                                channel-bandwidth: 28000
+                                modulation-scheme: 4
+                                modulation-scheme-name-at-lct: '4 QAM'
+                              - transmission-mode-name: '0028-4096QAM-175232/206076-1'
+                                channel-bandwidth: 28000
+                                modulation-scheme: 4096
+                                modulation-scheme-name-at-lct: '4096 QAM'
+                  headers:
+                    x-correlator:
+                      schema:
+                        type: string
+                        example: '550e8400-e29b-11d4-a716-446655440000'
+                      description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+                    exec-time:
+                      schema:
+                        type: integer
+                        example: 1100
+                      description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+                    backend-time:
+                      schema:
+                        type: integer
+                        example: 850
+                      description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+                    life-cycle-state:
+                      schema:
+                        type: string
+                        enum:
+                          - 'EXPERIMENTAL'
+                          - 'OPERATIONAL'
+                          - 'DEPRECATED'
+                          - 'OBSOLETE'
+                          - 'UNKNOWN'
+                          - 'NOT_YET_DEFINED'
+                        example: 'EXPERIMENTAL'
+                      description: 'Life cycle state of the consumed service'
+                '400':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '401':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '403':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '404':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '500':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                default:
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+        RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache:
+          AirInterfaceHistoricalPmFromCache: #[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-c-is-mwdi-1-1-1-214/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+            get:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
+                - name: mount-name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: '222250001'
+                  description: >
+                    'The mount-name of the device that is addressed by this callback
+                    from {$request.body#mount-name}'
+                - name: uuid
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: 'LTP-MWPS-TTP-1-1'
+                  description: >
+                    'The UUID of a LogicalTerminationPoint with LayerProtocolName == 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER' '
+                - name: local-id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: 'LP-MWPS-TTP-1-1'
+                  description: >
+                    'The Local-ID of the LayerProtocol with LayerProtocolName == 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER' '
+                - name: fields
+                  in: query
+                  schema:
+                    type: string
+                    example: ''
+                  description: >
+                    'If different from empty string, a fields filter with the following value to be added to the request
+                    from [/core-model-1-4:control-construct/profile-collection/profile=mwpp-1-0-0-string-p-005/string-profile-1-0:string-profile-pac/string-profile-configuration/string-value]'
+              responses:
+                '200':
+                  description: 'AirInterfaceHistoricalPerformances provided from cache'
+                  content:
+                    application/json:
+                      schema:
+                        description: 'Only relevant attributes listed'
+                        type: object
+                        properties:
+                          air-interface-2-0:air-interface-historical-performances:
+                            type: object
+                            properties:
+                              historical-performance-data-list:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    granularity-period:
+                                      type: string
+                                      enum: 
+                                        - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                                        - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
+                                        - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-UNKNOWN'
+                                        - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-NOT_YET_DEFINED'
+                                    period-end-time:
+                                      type: string
+                                      format: date-time
+                                    tx-level-min:
+                                      type: integer                                
+                                    tx-level-max:
+                                      type: integer
+                                    tx-level-avg:
+                                      type: integer
+                                    rx-level-min:
+                                      type: integer
+                                    rx-level-max:
+                                      type: integer
+                                    rx-level-avg:
+                                      type: integer
+                                    snir-min:
+                                      type: integer
+                                    snir-max:
+                                      type: integer
+                                    snir-avg:
+                                      type: integer
+                                    xpd-min:
+                                      type: integer
+                                    xpd-max:
+                                      type: integer
+                                    xpd-avg:
+                                      type: integer
+                                    time-xstates-list:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          transmission-mode:
+                                            type: string
+                                          time:
+                                            type: integer
+                                    es:
+                                      type: integer
+                                    ses:
+                                      type: integer
+                                    cses:
+                                      type: integer
+                                    unavailability:
+                                      type: integer
+                                    defect-blocks-sum:
+                                      type: integer
+                        example:
+                          air-interface-2-0:air-interface-historical-performance:
+                            historical-performance-data-list:
+                              - granularity-period: "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN"
+                                period-end-time: "2024-03-07T00:15:00.0+00:00"
+                                tx-level-min: 13
+                                tx-level-max: 13
+                                tx-level-avg: 13
+                                rx-level-min: -35
+                                rx-level-max: -35
+                                rx-level-avg: -35
+                                snir-min: 39
+                                snir-max: 40
+                                snir-avg: -99
+                                xpd-min: -99
+                                xpd-max: -99
+                                xpd-avg: -99
+                                time-xstates-list:
+                                  - transmission-mode: "1361-112000-2048-Light"
+                                    time: 897
+                                  - transmission-mode: "1361-112000-2048-Std"
+                                    time: 3   
+                                es: 0
+                                ses: 0
+                                cses: -1
+                                unavailability: 0
+                                defect-blocks-sum: -1
+                  headers:
+                    x-correlator:
+                      schema:
+                        type: string
+                        example: '550e8400-e29b-11d4-a716-446655440000'
+                      description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+                    exec-time:
+                      schema:
+                        type: integer
+                        example: 1100
+                      description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+                    backend-time:
+                      schema:
+                        type: integer
+                        example: 850
+                      description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+                    life-cycle-state:
+                      schema:
+                        type: string
+                        enum:
+                          - 'EXPERIMENTAL'
+                          - 'OPERATIONAL'
+                          - 'DEPRECATED'
+                          - 'OBSOLETE'
+                          - 'UNKNOWN'
+                          - 'NOT_YET_DEFINED'
+                        example: 'EXPERIMENTAL'
+                      description: 'Life cycle state of the consumed service'
+                '400':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '401':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '403':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '404':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '500':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                default:
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+        RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache:
+          EthernetContainerHistoricalPmFromCache: #[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-c-is-mwdi-1-1-1-224/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+            get:
+                parameters:
+                  - $ref: '#/components/parameters/user'
+                  - $ref: '#/components/parameters/originator'
+                  - $ref: '#/components/parameters/x-correlator'
+                  - $ref: '#/components/parameters/trace-indicator'
+                  - $ref: '#/components/parameters/customer-journey'
+                  - name: mount-name
+                    in: path
+                    required: true
+                    schema:
+                      type: string
+                      example: '222250001'
+                    description: >
+                      'The mount-name of the device that is addressed by this callback
+                      from {$request.body#mount-name}'
+                  - name: uuid
+                    in: path
+                    required: true
+                    schema:
+                      type: string
+                      example: 'LTP-MWPS-TTP-1-1'
+                    description: >
+                      'The UUID of a LogicalTerminationPoint with LayerProtocolName == 'ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER' '
+                  - name: local-id
+                    in: path
+                    required: true
+                    schema:
+                      type: string
+                      example: 'LP-MWPS-TTP-1-1'
+                    description: >
+                      'The Local-ID of the LayerProtocol with LayerProtocolName == 'ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER' '
+                  - name: fields
+                    in: query
+                    schema:
+                      type: string
+                      example: ''
+                    description: >
+                      'If different from empty string, a fields filter with the following value to be added to the request
+                      from [/core-model-1-4:control-construct/profile-collection/profile=mwpp-1-0-0-string-p-006/string-profile-1-0:string-profile-pac/string-profile-configuration/string-value]'
+                responses:
+                  '200':
+                    description: 'EthernetContainerHistoricalPerformances provided from cache'
+                    content:
+                      application/json:
+                        schema:
+                          description: 'Only relevant attributes listed'
+                          type: object
+                          properties:
+                            ethernet-container-2-0:ethernet-container-historical-performances:
+                              type: object
+                              properties:
+                                historical-performance-data-list:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      granularity-period: 
+                                        type: string
+                                        enum: 
+                                          - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                                          - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
+                                          - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-UNKNOWN'
+                                          - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-NOT_YET_DEFINED'
+                                      period-end-time:
+                                        type: string
+                                        format: date-time
+                                      max-bytes-per-second-output:
+                                        type: integer
+                                      total-bytes-input:
+                                        type: string
+                                        description: 'String representation of int64 value'
+                                      total-bytes-output:
+                                        type: string
+                                        description: 'String representation of int64 value'
+                                      total-frames-input:
+                                        type: string
+                                        description: 'String representation of int64 value'
+                                      total-frames-output:
+                                        type: string
+                                        description: 'String representation of int64 value'
+                                      forwarded-frames-input:
+                                        type: string
+                                        description: 'String representation of int64 value'
+                                      forwarded-frames-output:
+                                        type: string
+                                        description: 'String representation of int64 value'
+                                      unicast-frames-input:
+                                        type: string
+                                        description: 'String representation of int64 value'
+                                      unicast-frames-output:
+                                        type: string
+                                        description: 'String representation of int64 value'
+                                      multicast-frames-input:
+                                        type: integer
+                                      multicast-frames-output:
+                                        type: integer
+                                      broadcast-frames-input:
+                                        type: integer
+                                      broadcast-frames-output:
+                                        type: integer
+                                      fragmented-frames-input:
+                                        type: integer
+                                      errored-frames-input:
+                                        type: integer
+                                      errored-frames-output:
+                                        type: integer
+                                      dropped-frames-input:
+                                        type: integer
+                                      dropped-frames-output:
+                                        type: integer
+                                      oversized-frames-ingress:
+                                        type: string
+                                        description: 'String representation of int64 value'
+                                      undersized-frames-ingress:
+                                        type: string
+                                        description: 'String representation of int64 value'
+                                      jabber-frames-ingress:
+                                        type: string
+                                        description: 'String representation of int64 value'
+                                      unknown-protocol-frames-input:
+                                        type: string
+                                        description: 'String representation of int64 value'
+                          example:
+                            ethernet-container-2-0:ethernet-container-historical-performance:
+                              historical-performance-data-list:
+                                - granularity-period: "ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN"
+                                  period-end-time: "2024-03-07T00:15:00.0+00:00"
+                                  max-bytes-per-second-output: 0
+                                  total-bytes-input: "0"
+                                  total-bytes-output: "0"
+                                  total-frames-input: "-1"
+                                  total-frames-output: "-1"
+                                  forwarded-frames-input: "-1"
+                                  forwarded-frames-output: "-1"
+                                  unicast-frames-input: "0"
+                                  unicast-frames-output: "0"
+                                  multicast-frames-input: 0
+                                  multicast-frames-output: 0
+                                  broadcast-frames-input: 0
+                                  broadcast-frames-output: 0
+                                  fragmented-frames-input: -1
+                                  errored-frames-input: 0
+                                  errored-frames-output: 0
+                                  dropped-frames-input: 0
+                                  dropped-frames-output: 0
+                                  oversized-frames-ingress: "-1"
+                                  undersized-frames-ingress: "-1"
+                                  jabber-frames-ingress: "-1"
+                                  unknown-protocol-frames-input: "-1"
+                    headers:
+                      x-correlator:
+                        schema:
+                          type: string
+                          example: '550e8400-e29b-11d4-a716-446655440000'
+                        description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+                      exec-time:
+                        schema:
+                          type: integer
+                          example: 1100
+                        description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+                      backend-time:
+                        schema:
+                          type: integer
+                          example: 850
+                        description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+                      life-cycle-state:
+                        schema:
+                          type: string
+                          enum:
+                            - 'EXPERIMENTAL'
+                            - 'OPERATIONAL'
+                            - 'DEPRECATED'
+                            - 'OBSOLETE'
+                            - 'UNKNOWN'
+                            - 'NOT_YET_DEFINED'
+                          example: 'EXPERIMENTAL'
+                        description: 'Life cycle state of the consumed service'
+                  '400':
+                    $ref: '#/components/responses/responseForErroredServiceRequests'
+                  '401':
+                    $ref: '#/components/responses/responseForErroredServiceRequests'
+                  '403':
+                    $ref: '#/components/responses/responseForErroredServiceRequests'
+                  '404':
+                    $ref: '#/components/responses/responseForErroredServiceRequests'
+                  '500':
+                    $ref: '#/components/responses/responseForErroredServiceRequests'
+                  default:
+                    $ref: '#/components/responses/responseForErroredServiceRequests'
+        
 
 ########################################################################################################################
 #   Service Layer - Basic Part
