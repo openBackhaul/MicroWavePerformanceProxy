@@ -838,47 +838,47 @@ paths:
                                   'Time when the counter values have been recorded and the counter reset
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/period-end-time}'
                               max-bytes-per-second-output:
-                                type: integer
+                                type: string
                                 description: >
                                   'Counts the number of Bytes of Ethernet traffic (before header compression) transmitted within a second and keeps the highest value within the measurement period
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/max-bytes-per-second-output}'
                               total-bytes-input:
-                                type: integer
+                                type: string
                                 description: >
                                   'Total number of Bytes of Ethernet traffic (before header compression) received during the measurement period
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/total-bytes-input}'
                               total-bytes-output:
-                                type: integer
+                                type: string
                                 description: >
                                   'Total number of Bytes of Ethernet traffic (before header compression) transmitted (in direction out of the device) during the measurement period
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/total-bytes-output}'
                               total-frames-input:
-                                type: integer
+                                type: string
                                 description: >
                                   'The total number of Ethernet frames received at this interface (including those received in error)
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/total-frames-input}'
                               total-frames-output:
-                                type: integer
+                                type: string
                                 description: >
                                   'The total number of Ethernet frames sent at this interface
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/total-frames-output}'
                               forwarded-frames-input:
-                                type: integer
+                                type: string
                                 description: >
                                   'Number of input frames at this interface, for which the device was not their final destination and for which the device attempted to find a route to forward them to that final destination
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/forwarded-frames-input}'
                               forwarded-frames-output:
-                                type: integer
+                                type: string
                                 description: >
                                   'Number of frames at this interface, for which the device was not their final destination and for which it was successful in finding a path to their final destination
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/forwarded-frames-output}'
                               unicast-frames-input:
-                                type: integer
+                                type: string
                                 description: >
                                   'Total number of unicast frames received at this interface
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/unicast-frames-input}'
                               unicast-frames-output:
-                                type: integer
+                                type: string
                                 description: >
                                   'Total number of unicast frames sent at this interface
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/unicast-frames-output}'
@@ -928,22 +928,22 @@ paths:
                                   'The number of output Ethernet frames, for which no problem was encountered to prevent their transmission to their destination, but were discarded (e.g., for lack of buffer space)
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/dropped-frames-output}'
                               oversized-frames-ingress:
-                                type: integer
+                                type: string
                                 description: >
                                   'The total number of frames received that were longer than 1518 octets (excluding framing bits, but including FCS octets) and were otherwise well formed
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/oversized-frames-ingress}'
                               undersized-frames-ingress:
-                                type: integer
+                                type: string
                                 description: >
                                   'The total number of frames received that were less than 64 octets long (excluding framing bits, but including FCS octets) and were otherwise well formed
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/undersized-frames-ingress}'
                               jabber-frames-ingress:
-                                type: integer
+                                type: string
                                 description: >
                                   'Number of jabber frames received on the interface. Jabber frames are typically defined as oversize frames which also have a bad CRC. Implementations may use slightly different definitions of what constitutes a jabber frame. Often indicative of a NIC hardware problem
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/jabber-frames-ingress}'
                               unknown-protocol-frames-input:
-                                type: integer
+                                type: string
                                 description: >
                                   'Total number of received frames that were transporting an unknown protocol
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/unknown-protocol-frames-input}'
