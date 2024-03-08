@@ -950,399 +950,337 @@ paths:
                 example:
                   air-interface-list:
                     - air-interface-identifiers:
-                        link-endpoint-id:
-                        link-id:
-                        logical-termination-point-id:
+                        link-endpoint-id:  "325557888A"
+                        link-id:  "325557888"
+                        logical-termination-point-id: "RF-2146697744"
                         link-aggregation-identifiers:
-                          - link-id:
-                          - link-id:
+                          - link-id: "325557888"
+                          - link-id: "325557889"
                       air-interface-configuration:
-                        configured-atpc-is-on:
-                        configured-atpc-threshold-upper:
-                        onfigured-atpc-threshold-lower:
-                        configured-atpc-tx-power-min:
-                        configured-tx-power:
+                        configured-atpc-is-on: true
+                        configured-atpc-threshold-upper: 99
+                        onfigured-atpc-threshold-lower: -45
+                        configured-atpc-tx-power-min: -10
+                        configured-tx-power: 4
                         configured-modulation-minimum:
-                          number-of-states:
-                          name-at-lct:
+                          number-of-states: 4
+                          name-at-lct: "4 QAM"
                           configured-capacity-minimum:
-                        configured-modulation-maximum:
-                          number-of-states:
-                          name-at-lct:
+                        configured-modulation-maximum: 
+                          number-of-states: 1024
+                          name-at-lct: "1024 QAM"
                           configured-capacity-maximum:
                       air-interface-performance-measurements-list:
-                        - granularity-period:
-                          period-end-time:
-                          transmit-level-minimum:
-                          transmit-level-maximum:
-                          transmit-level-average:
-                          receive-level-minimum:
-                          receive-level-maximum:
-                          receive-level-average:
-                          signal-to-noise-ratio-minimum:
-                          signal-to-noise-ratio-maximum:
-                          signal-to-noise-ratio-average:
-                          cross-polarization-discrimination-minimum:
-                          cross-polarization-discrimination-maximum:
-                          cross-polarization-discrimination-average:
-                          operated-transmission-modes-list:
+                        - granularity-period: "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN"
+                          period-end-time: "2024-03-06T13:00:00+01:00"
+                          transmit-level-minimum: -4
+                          transmit-level-maximum: -4
+                          transmit-level-average: 99
+                          receive-level-minimum: -45
+                          receive-level-maximum: -44
+                          receive-level-average: 99
+                          signal-to-noise-ratio-minimum: 40
+                          signal-to-noise-ratio-maximum: 41
+                          signal-to-noise-ratio-average: -99
+                          cross-polarization-discrimination-minimum: 30
+                          cross-polarization-discrimination-maximum: 31
+                          cross-polarization-discrimination-average: 99
+                          operated-transmission-modes-list: 
+                            - transmission-mode-name: "56000-1024-v2"
+                              modulation-scheme-name-at-lct:
+                              time: 897
+                              capacity:
+                            - transmission-mode-name: "56000-128-v4"
+                              modulation-scheme-name-at-lct:
+                              time: 3
+                              capacity: 
                           interval-capacity:
-                            - transmission-mode-name:
+                        - granularity-period: "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN"
+                          period-end-time: "2024-03-06T13:15:00+01:00"
+                          transmit-level-minimum: -4
+                          transmit-level-maximum: -4
+                          transmit-level-average: 99
+                          receive-level-minimum: -45
+                          receive-level-maximum: -44
+                          receive-level-average: 99
+                          signal-to-noise-ratio-minimum: 40
+                          signal-to-noise-ratio-maximum: 41
+                          signal-to-noise-ratio-average: -99
+                          cross-polarization-discrimination-minimum: 30
+                          cross-polarization-discrimination-maximum: 31
+                          cross-polarization-discrimination-average: 99
+                          operated-transmission-modes-list: 
+                            - transmission-mode-name: "56000-1024-v2"
                               modulation-scheme-name-at-lct:
-                              time:
+                              time: 897
                               capacity:
-                              errorred-seconds:
-                              severely-errorred-seconds:
-                              consecutive-severely-errorred-seconds:
-                              total-unavailability:
-                              defect-blocks:
-                            - transmission-mode-name:
+                            - transmission-mode-name: "7000-16-v2"
                               modulation-scheme-name-at-lct:
-                              time:
-                              capacity:
-                              errorred-seconds:
-                              severely-errorred-seconds:
-                              consecutive-severely-errorred-seconds:
-                              total-unavailability:
-                              defect-blocks:
-                        - granularity-period:
-                          period-end-time:
-                          transmit-level-minimum:
-                          transmit-level-maximum:
-                          transmit-level-average:
-                          receive-level-minimum:
-                          receive-level-maximum:
-                          receive-level-average:
-                          signal-to-noise-ratio-minimum:
-                          signal-to-noise-ratio-maximum:
-                          signal-to-noise-ratio-average:
-                          cross-polarization-discrimination-minimum:
-                          cross-polarization-discrimination-maximum:
-                          cross-polarization-discrimination-average:
-                          operated-transmission-modes-list:
-                            - transmission-mode-name:
-                              modulation-scheme-name-at-lct:
-                              time:
-                              capacity:                              
-                              errorred-seconds:
-                              severely-errorred-seconds:
-                              consecutive-severely-errorred-seconds:
-                              total-unavailability:
-                              defect-blocks:
-                            - transmission-mode-name:
-                              modulation-scheme-name-at-lct:
-                              time:
-                              capacity:
-                              errorred-seconds:
-                              severely-errorred-seconds:
-                              consecutive-severely-errorred-seconds:
-                              total-unavailability:
-                              defect-blocks:
-                          interval-capacity:
+                              time: 3
+                              capacity: 
+                          interval-capacity: 
                       transmission-mode-list:
-                        - transmission-mode-name:
-                          number-of-states:
-                          modulation-scheme-name-at-lct:
-                          channel-bandwidth:
-                          code-rate:
-                          symbol-rate-reduction-factor:
-                          transmit-power-minimum:
-                          transmit-power-maximum:
-                          receive-threshold:
-                          transmission-mode-rank:
-                          adaptive-modulation-upshift-level:
-                          adaptive-modulation-downshift-level:
-                          xpic-is-available:
-                          supported-as-fixed-configuration:
-                        - transmission-mode-name:
-                          number-of-states:
-                          modulation-scheme-name-at-lct:
-                          channel-bandwidth:
-                          code-rate:
-                          symbol-rate-reduction-factor:
-                          transmit-power-minimum:
-                          transmit-power-maximum:
-                          receive-threshold:
-                          transmission-mode-rank:
-                          adaptive-modulation-upshift-level:
-                          adaptive-modulation-downshift-level:
-                          xpic-is-available:
-                          supported-as-fixed-configuration:
-                        - transmission-mode-name:
-                          number-of-states:
-                          modulation-scheme-name-at-lct:
-                          channel-bandwidth:
-                          code-rate:
-                          symbol-rate-reduction-factor:
-                          transmit-power-minimum:
-                          transmit-power-maximum:
-                          receive-threshold:
-                          transmission-mode-rank:
-                          adaptive-modulation-upshift-level:
-                          adaptive-modulation-downshift-level:
-                          xpic-is-available:
-                          supported-as-fixed-configuration:
+                        - transmission-mode-name: "56000-1024-v2"
+                          number-of-states: 1024
+                          modulation-scheme-name-at-lct: "1024 QAM"
+                          channel-bandwidth: 56000
+                          code-rate: 94
+                          symbol-rate-reduction-factor: 1
+                          transmit-power-minimum: 4
+                          transmit-power-maximum: -10
+                          receive-threshold: 99
+                          transmission-mode-rank: 456
+                          adaptive-modulation-upshift-level: 99
+                          adaptive-modulation-downshift-level: 99
+                          xpic-is-available: true
+                          supported-as-fixed-configuration: false
+                        - transmission-mode-name: "7000-16-v2"
+                          number-of-states: 16
+                          modulation-scheme-name-at-lct: "16 QAM"
+                          channel-bandwidth: 7000
+                          code-rate: 86
+                          symbol-rate-reduction-factor: 1
+                          transmit-power-minimum: -10
+                          transmit-power-maximum: 4
+                          receive-threshold: 99
+                          transmission-mode-rank: 21
+                          adaptive-modulation-upshift-level: 99
+                          adaptive-modulation-downshift-level: 99
+                          xpic-is-available: true
+                          supported-as-fixed-configuration: false
+                        - transmission-mode-name: "40000-128-v0"
+                          number-of-states: 128
+                          modulation-scheme-name-at-lct: "128 QAM"
+                          channel-bandwidth: 40000
+                          code-rate: 94
+                          symbol-rate-reduction-factor: 1
+                          transmit-power-minimum: -10
+                          transmit-power-maximum: 4
+                          receive-threshold: 99
+                          transmission-mode-rank: 229
+                          adaptive-modulation-upshift-level: 99
+                          adaptive-modulation-downshift-level: 99
+                          xpic-is-available: true
+                          supported-as-fixed-configuration: false
+
+
                     - air-interface-identifiers:
-                        link-endpoint-id:
-                        link-id:
-                        logical-termination-point-id:
-                        link-aggregation-identifiers:
-                          - link-id:
-                          - link-id:
+                        link-endpoint-id: "101551121B"
+                        link-id: "101551121"
+                        logical-termination-point-id: "RF-2146438849"
                       air-interface-configuration:
-                        configured-atpc-is-on:
-                        configured-atpc-threshold-upper:
-                        onfigured-atpc-threshold-lower:
-                        configured-atpc-tx-power-min:
-                        configured-tx-power:
+                        configured-atpc-is-on: false
+                        configured-atpc-threshold-upper: 99
+                        onfigured-atpc-threshold-lower: -30
+                        configured-atpc-tx-power-min: 20
+                        configured-tx-power: 20
                         configured-modulation-minimum:
-                          number-of-states:
-                          name-at-lct:
+                          number-of-states: 4
+                          name-at-lct: "4 QAM Strong"
                           configured-capacity-minimum:
                         configured-modulation-maximum:
-                          number-of-states:
-                          name-at-lct:
+                          number-of-states: 2048
+                          name-at-lct: "2048 QAM light"
                           configured-capacity-maximum:
                       air-interface-performance-measurements-list:
-                        - granularity-period:
-                          period-end-time:
-                          transmit-level-minimum:
-                          transmit-level-maximum:
-                          transmit-level-average:
-                          receive-level-minimum:
-                          receive-level-maximum:
-                          receive-level-average:
-                          signal-to-noise-ratio-minimum:
-                          signal-to-noise-ratio-maximum:
-                          signal-to-noise-ratio-average:
-                          cross-polarization-discrimination-minimum:
-                          cross-polarization-discrimination-maximum:
-                          cross-polarization-discrimination-average:
-                          operated-transmission-modes-list:
+                        - granularity-period: "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN"
+                          period-end-time: "2024-03-07T09:30:00+01:00"
+                          transmit-level-minimum: 20
+                          transmit-level-maximum: 20
+                          transmit-level-average: 99
+                          receive-level-minimum: -42
+                          receive-level-maximum: -41
+                          receive-level-average: 99
+                          signal-to-noise-ratio-minimum: 42
+                          signal-to-noise-ratio-maximum: 43
+                          signal-to-noise-ratio-average: -99
+                          cross-polarization-discrimination-minimum: 28
+                          cross-polarization-discrimination-maximum: 39
+                          cross-polarization-discrimination-average: -99
+                          operated-transmission-modes-list: 
+                          - transmission-mode-name: "1361-112000-2048-Light"
+                            modulation-scheme-name-at-lct: "2048 QAM light"
+                            time: 643
+                            capacity:
+                          - transmission-mode-name: 1361-112000-256-Light"
+                            modulation-scheme-name-at-lct: "256 QAM light"
+                            time: 257
+                            capacity: 
                           interval-capacity:
-                            - transmission-mode-name:
-                              modulation-scheme-name-at-lct:
-                              time:
-                              capacity:
-                              errorred-seconds:
-                              severely-errorred-seconds:
-                              consecutive-severely-errorred-seconds:
-                              total-unavailability:
-                              defect-blocks:
-                            - transmission-mode-name:
-                              modulation-scheme-name-at-lct:
-                              time:
-                              capacity:
-                              errorred-seconds:
-                              severely-errorred-seconds:
-                              consecutive-severely-errorred-seconds:
-                              total-unavailability:
-                              defect-blocks:
-                        - granularity-period:
-                          period-end-time:
-                          transmit-level-minimum:
-                          transmit-level-maximum:
-                          transmit-level-average:
-                          receive-level-minimum:
-                          receive-level-maximum:
-                          receive-level-average:
-                          signal-to-noise-ratio-minimum:
-                          signal-to-noise-ratio-maximum:
-                          signal-to-noise-ratio-average:
-                          cross-polarization-discrimination-minimum:
-                          cross-polarization-discrimination-maximum:
-                          cross-polarization-discrimination-average:
-                          operated-transmission-modes-list:
-                            - transmission-mode-name:
-                              modulation-scheme-name-at-lct:
-                              time:
-                              capacity:                              
-                              errorred-seconds:
-                              severely-errorred-seconds:
-                              consecutive-severely-errorred-seconds:
-                              total-unavailability:
-                              defect-blocks:
-                            - transmission-mode-name:
-                              modulation-scheme-name-at-lct:
-                              time:
-                              capacity:
-                              errorred-seconds:
-                              severely-errorred-seconds:
-                              consecutive-severely-errorred-seconds:
-                              total-unavailability:
-                              defect-blocks:
+                        - granularity-period: "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN"
+                          period-end-time: "2024-03-07T09:45:00+01:00"
+                          transmit-level-minimum: 20
+                          transmit-level-maximum: 20
+                          transmit-level-average: 99
+                          receive-level-minimum: -42
+                          receive-level-maximum: -41
+                          receive-level-average: 99
+                          signal-to-noise-ratio-minimum: 42
+                          signal-to-noise-ratio-maximum: 43
+                          signal-to-noise-ratio-average: -99
+                          cross-polarization-discrimination-minimum: 28
+                          cross-polarization-discrimination-maximum: 39
+                          cross-polarization-discrimination-average: -99
+                          operated-transmission-modes-list: 
+                          - transmission-mode-name: "1361-112000-2048-Light"
+                            modulation-scheme-name-at-lct: "2048 QAM light"
+                            time: 643
+                            capacity:
+                          - transmission-mode-name: 1361-112000-256-Light"
+                            modulation-scheme-name-at-lct: "256 QAM light"
+                            time: 257
+                            capacity: 
                           interval-capacity:
                       transmission-mode-list:
-                        - transmission-mode-name:
-                          number-of-states:
-                          modulation-scheme-name-at-lct:
-                          channel-bandwidth:
-                          code-rate:
-                          symbol-rate-reduction-factor:
-                          transmit-power-minimum:
-                          transmit-power-maximum:
-                          receive-threshold:
-                          transmission-mode-rank:
-                          adaptive-modulation-upshift-level:
-                          adaptive-modulation-downshift-level:
-                          xpic-is-available:
-                          supported-as-fixed-configuration:
-                        - transmission-mode-name:
-                          number-of-states:
-                          modulation-scheme-name-at-lct:
-                          channel-bandwidth:
-                          code-rate:
-                          symbol-rate-reduction-factor:
-                          transmit-power-minimum:
-                          transmit-power-maximum:
-                          receive-threshold:
-                          transmission-mode-rank:
-                          adaptive-modulation-upshift-level:
-                          adaptive-modulation-downshift-level:
-                          xpic-is-available:
-                          supported-as-fixed-configuration:
-                        - transmission-mode-name:
-                          number-of-states:
-                          modulation-scheme-name-at-lct:
-                          channel-bandwidth:
-                          code-rate:
-                          symbol-rate-reduction-factor:
-                          transmit-power-minimum:
-                          transmit-power-maximum:
-                          receive-threshold:
-                          transmission-mode-rank:
-                          adaptive-modulation-upshift-level:
-                          adaptive-modulation-downshift-level:
-                          xpic-is-available:
-                          supported-as-fixed-configuration: 
+                        - transmission-mode-name: "1303-80000-512-Std"
+                          number-of-states: 512
+                          modulation-scheme-name-at-lct: "512 QAM"
+                          channel-bandwidth: 80000
+                          code-rate: -1
+                          symbol-rate-reduction-factor: 1
+                          transmit-power-minimum: 99
+                          transmit-power-maximum: 21
+                          receive-threshold: 99
+                          transmission-mode-rank: 5120
+                          adaptive-modulation-upshift-level: 99
+                          adaptive-modulation-downshift-level: 99
+                          xpic-is-available: true
+                          supported-as-fixed-configuration: true
+                        - transmission-mode-name: "1356-7000-16-Strong"
+                          number-of-states: 16
+                          modulation-scheme-name-at-lct: "16 QAM Strong"
+                          channel-bandwidth: 7000
+                          code-rate: -1
+                          symbol-rate-reduction-factor: 1
+                          transmit-power-minimum: 99
+                          transmit-power-maximum: 24
+                          receive-threshold: 99
+                          transmission-mode-rank: 159
+                          adaptive-modulation-upshift-level: 99
+                          adaptive-modulation-downshift-level: 99
+                          xpic-is-available: true
+                          supported-as-fixed-configuration: false
+                        - transmission-mode-name: "1361-112000-2048-Light"
+                          number-of-states: 2048
+                          modulation-scheme-name-at-lct: "2048 QAM Light"
+                          channel-bandwidth: 40000
+                          code-rate: 94
+                          symbol-rate-reduction-factor: 1
+                          transmit-power-minimum: -10
+                          transmit-power-maximum: 4
+                          receive-threshold: 99
+                          transmission-mode-rank: 555
+                          adaptive-modulation-upshift-level: 99
+                          adaptive-modulation-downshift-level: 99
+                          xpic-is-available: true
+                          supported-as-fixed-configuration: true
+                          
+
                   ethernet-container-list:
                     - ethernet-container-identifiers:
-                        interface-name:
-                        logical-termination-point-id:
+                        interface-name: "WAN 1/1/1"
+                        logical-termination-point-id: "ETH-2134646913"
                       ethernet-container-performance-measurements-list:
-                        - granularity-period: 
-                          period-end-time:
-                          max-bytes-per-second-output:
-                          total-bytes-input:
-                          total-bytes-output:
-                          total-frames-input:
-                          total-frames-output:
-                          forwarded-frames-input:
-                          forwarded-frames-output:
-                          unicast-frames-input:
-                          unicast-frames-output:
-                          multicast-frames-input:
-                          multicast-frames-output:
-                          broadcast-frames-input:
-                          broadcast-frames-output:
-                          fragmented-frames-input:
-                          errored-frames-input:
-                          errored-frames-output:
-                          dropped-frames-input:
-                          dropped-frames-output:
-                          oversized-frames-ingress:
-                          undersized-frames-ingress:
-                          jabber-frames-ingress:
-                          unknown-protocol-frames-input:
-                        - granularity-period: 
-                          period-end-time:
-                          max-bytes-per-second-output:
-                          total-bytes-input:
-                          total-bytes-output:
-                          total-frames-input:
-                          total-frames-output:
-                          forwarded-frames-input:
-                          forwarded-frames-output:
-                          unicast-frames-input:
-                          unicast-frames-output:
-                          multicast-frames-input:
-                          multicast-frames-output:
-                          broadcast-frames-input:
-                          broadcast-frames-output:
-                          fragmented-frames-input:
-                          errored-frames-input:
-                          errored-frames-output:
-                          dropped-frames-input:
-                          dropped-frames-output:
-                          oversized-frames-ingress:
-                          undersized-frames-ingress:
-                          jabber-frames-ingress:
-                          unknown-protocol-frames-input:
+                        - granularity-period: "ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN"
+                          period-end-time: "2024-03-07T00:15:00.0+00:00"
+                          max-bytes-per-second-output: 0
+                          total-bytes-input: "0"
+                          total-bytes-output: "0"
+                          total-frames-input: "-1"
+                          total-frames-output: "-1"
+                          forwarded-frames-input: "-1"
+                          forwarded-frames-output: "-1"
+                          unicast-frames-input: "0"
+                          unicast-frames-output: "0"
+                          multicast-frames-input: 0
+                          multicast-frames-output: 0
+                          broadcast-frames-input: 0
+                          broadcast-frames-output: 0
+                          fragmented-frames-input: -1
+                          errored-frames-input: 0
+                          errored-frames-output: 0
+                          dropped-frames-input: 0
+                          dropped-frames-output: 0
+                          oversized-frames-ingress: "-1"
+                          undersized-frames-ingress: "-1"
+                          jabber-frames-ingress: "-1"
+                          unknown-protocol-frames-input: "-1"
+                        - granularity-period: "ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN"
+                          period-end-time: "2024-03-07T00:30:00.0+00:00"
+                          max-bytes-per-second-output: 0
+                          total-bytes-input: "0"
+                          total-bytes-output: "0"
+                          total-frames-input: "-1"
+                          total-frames-output: "-1"
+                          forwarded-frames-input: "-1"
+                          forwarded-frames-output: "-1"
+                          unicast-frames-input: "0"
+                          unicast-frames-output: "0"
+                          multicast-frames-input: 0
+                          multicast-frames-output: 0
+                          broadcast-frames-input: 0
+                          broadcast-frames-output: 0
+                          fragmented-frames-input: -1
+                          errored-frames-input: 0
+                          errored-frames-output: 0
+                          dropped-frames-input: 0
+                          dropped-frames-output: 0
+                          oversized-frames-ingress: "-1"
+                          undersized-frames-ingress: "-1"
+                          jabber-frames-ingress: "-1"
+                          unknown-protocol-frames-input: "-1"
                     - ethernet-container-identifiers:
-                        interface-name:
-                        logical-termination-point-id:
+                        interface-name: "WAN 1/1/2"
+                        logical-termination-point-id: "ETH-2134646914"
                       ethernet-container-performance-measurements-list:
-                        - granularity-period: 
-                          period-end-time:
-                          max-bytes-per-second-output:
-                          total-bytes-input:
-                          total-bytes-output:
-                          total-frames-input:
-                          total-frames-output:
-                          forwarded-frames-input:
-                          forwarded-frames-output:
-                          unicast-frames-input:
-                          unicast-frames-output:
-                          multicast-frames-input:
-                          multicast-frames-output:
-                          broadcast-frames-input:
-                          broadcast-frames-output:
-                          fragmented-frames-input:
-                          errored-frames-input:
-                          errored-frames-output:
-                          dropped-frames-input:
-                          dropped-frames-output:
-                          oversized-frames-ingress:
-                          undersized-frames-ingress:
-                          jabber-frames-ingress:
-                          unknown-protocol-frames-input:
-                        - granularity-period: 
-                          period-end-time:
-                          max-bytes-per-second-output:
-                          total-bytes-input:
-                          total-bytes-output:
-                          total-frames-input:
-                          total-frames-output:
-                          forwarded-frames-input:
-                          forwarded-frames-output:
-                          unicast-frames-input:
-                          unicast-frames-output:
-                          multicast-frames-input:
-                          multicast-frames-output:
-                          broadcast-frames-input:
-                          broadcast-frames-output:
-                          fragmented-frames-input:
-                          errored-frames-input:
-                          errored-frames-output:
-                          dropped-frames-input:
-                          dropped-frames-output:
-                          oversized-frames-ingress:
-                          undersized-frames-ingress:
-                          jabber-frames-ingress:
-                          unknown-protocol-frames-input:
-                        - period-end-time:
-                          max-bytes-per-second-output:
-                          total-bytes-input:
-                          total-bytes-output:
-                          total-frames-input:
-                          total-frames-output:
-                          forwarded-frames-input:
-                          forwarded-frames-output:
-                          unicast-frames-input:
-                          unicast-frames-output:
-                          multicast-frames-input:
-                          multicast-frames-output:
-                          broadcast-frames-input:
-                          broadcast-frames-output:
-                          fragmented-frames-input:
-                          errored-frames-input:
-                          errored-frames-output:
-                          dropped-frames-input:
-                          dropped-frames-output:
-                          oversized-frames-ingress:
-                          undersized-frames-ingress:
-                          jabber-frames-ingress:
-                          unknown-protocol-frames-input:
+                        - granularity-period: "ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN"
+                          period-end-time: "2024-03-07T01:15:00.0+00:00"
+                          max-bytes-per-second-output: 0
+                          total-bytes-input: "0"
+                          total-bytes-output: "0"
+                          total-frames-input: "-1"
+                          total-frames-output: "-1"
+                          forwarded-frames-input: "-1"
+                          forwarded-frames-output: "-1"
+                          unicast-frames-input: "0"
+                          unicast-frames-output: "0"
+                          multicast-frames-input: 0
+                          multicast-frames-output: 0
+                          broadcast-frames-input: 0
+                          broadcast-frames-output: 0
+                          fragmented-frames-input: -1
+                          errored-frames-input: 0
+                          errored-frames-output: 0
+                          dropped-frames-input: 0
+                          dropped-frames-output: 0
+                          oversized-frames-ingress: "-1"
+                          undersized-frames-ingress: "-1"
+                          jabber-frames-ingress: "-1"
+                          unknown-protocol-frames-input: "-1"
+                        - granularity-period: "ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN"
+                          period-end-time: "2024-03-07T01:30:00.0+00:00"
+                          max-bytes-per-second-output: 0
+                          total-bytes-input: "0"
+                          total-bytes-output: "0"
+                          total-frames-input: "-1"
+                          total-frames-output: "-1"
+                          forwarded-frames-input: "-1"
+                          forwarded-frames-output: "-1"
+                          unicast-frames-input: "0"
+                          unicast-frames-output: "0"
+                          multicast-frames-input: 0
+                          multicast-frames-output: 0
+                          broadcast-frames-input: 0
+                          broadcast-frames-output: 0
+                          fragmented-frames-input: -1
+                          errored-frames-input: 0
+                          errored-frames-output: 0
+                          dropped-frames-input: 0
+                          dropped-frames-output: 0
+                          oversized-frames-ingress: "-1"
+                          undersized-frames-ingress: "-1"
+                          jabber-frames-ingress: "-1"
+                          unknown-protocol-frames-input: "-1"
           headers:
               life-cycle-state:
                 schema:
