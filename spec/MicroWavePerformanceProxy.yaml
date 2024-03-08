@@ -1308,7 +1308,7 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
       callbacks:
         RequestForProvidingHistoricalPmDataCausesReadingLtpStructure:
-          LtpStructure: #[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-c-is-mwdi-1-1-1-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name] 
+          LtpStructure: #[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-c-is-mwdi-1-1-1-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
             get:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -1555,7 +1555,7 @@ paths:
                     from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/uuid}
                     where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER
                     as follows:
-                    ClientLtp OF AirInterfaceUuid = ClientStructureUuid 
+                    ClientLtp OF AirInterfaceUuid = ClientStructureUuid
                     ClientLtp OF ClientStructureUuid = ClientEthernetContainerUuid
                     ServerLtp OF ClientEthernetContainerUuid = LIST-OF ServingStructureUuid
 
@@ -1938,7 +1938,7 @@ paths:
                                   properties:
                                     granularity-period:
                                       type: string
-                                      enum: 
+                                      enum:
                                         - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
                                         - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
                                         - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-UNKNOWN'
@@ -1947,7 +1947,7 @@ paths:
                                       type: string
                                       format: date-time
                                     tx-level-min:
-                                      type: integer                                
+                                      type: integer
                                     tx-level-max:
                                       type: integer
                                     tx-level-avg:
@@ -2010,7 +2010,7 @@ paths:
                                   - transmission-mode: "1361-112000-2048-Light"
                                     time: 897
                                   - transmission-mode: "1361-112000-2048-Std"
-                                    time: 3   
+                                    time: 3
                                 es: 0
                                 ses: 0
                                 cses: -1
@@ -2059,50 +2059,50 @@ paths:
         RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache:
           EthernetContainerHistoricalPmFromCache: #[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-tcp-c-mwdi-1-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-c-is-mwdi-1-1-1-224/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
             get:
-                parameters:
-                  - $ref: '#/components/parameters/user'
-                  - $ref: '#/components/parameters/originator'
-                  - $ref: '#/components/parameters/x-correlator'
-                  - $ref: '#/components/parameters/trace-indicator'
-                  - $ref: '#/components/parameters/customer-journey'
-                  - name: mount-name
-                    in: path
-                    required: true
-                    schema:
-                      type: string
-                      example: '222250001'
-                    description: >
-                      'The mount-name of the device that is addressed by this callback
-                      from {$request.body#mount-name}'
-                  - name: uuid
-                    in: path
-                    required: true
-                    schema:
-                      type: string
-                      example: 'LTP-MWPS-TTP-1-1'
-                    description: >
-                      'The UUID of a LogicalTerminationPoint that is addressed by the request
-                      from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/uuid}
-                      where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER'
-                  - name: local-id
-                    in: path
-                    required: true
-                    schema:
-                      type: string
-                      example: 'LP-MWPS-TTP-1-1'
-                    description: >
-                      'The localID of a LogicalTerminationPoint that is addressed by the request
-                      from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/local-id}
-                      where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER'
-                  - name: fields
-                    in: query
-                    schema:
-                      type: string
-                      example: ''
-                    description: >
-                      'If different from empty string, a fields filter with the following value to be added to the request
-                      from [/core-model-1-4:control-construct/profile-collection/profile=mwpp-1-0-0-string-p-006/string-profile-1-0:string-profile-pac/string-profile-configuration/string-value]'
-                responses:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
+                - name: mount-name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: '222250001'
+                  description: >
+                    'The mount-name of the device that is addressed by this callback
+                    from {$request.body#mount-name}'
+                - name: uuid
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: 'LTP-MWPS-TTP-1-1'
+                  description: >
+                    'The UUID of a LogicalTerminationPoint that is addressed by the request
+                    from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/uuid}
+                    where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER'
+                - name: local-id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                    example: 'LP-MWPS-TTP-1-1'
+                  description: >
+                    'The localID of a LogicalTerminationPoint that is addressed by the request
+                    from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/local-id}
+                    where {RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#core-model-1-4:control-construct/logical-termination-point/layer-protocol/layer-protocol-name} == ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER'
+                - name: fields
+                  in: query
+                  schema:
+                    type: string
+                    example: ''
+                  description: >
+                    'If different from empty string, a fields filter with the following value to be added to the request
+                    from [/core-model-1-4:control-construct/profile-collection/profile=mwpp-1-0-0-string-p-006/string-profile-1-0:string-profile-pac/string-profile-configuration/string-value]'
+              responses:
                   '200':
                     description: 'EthernetContainerHistoricalPerformances provided from cache'
                     content:
@@ -2119,9 +2119,9 @@ paths:
                                   items:
                                     type: object
                                     properties:
-                                      granularity-period: 
+                                      granularity-period:
                                         type: string
-                                        enum: 
+                                        enum:
                                           - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
                                           - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
                                           - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-UNKNOWN'
@@ -2252,7 +2252,7 @@ paths:
                     $ref: '#/components/responses/responseForErroredServiceRequests'
                   default:
                     $ref: '#/components/responses/responseForErroredServiceRequests'
-        
+
 
 ########################################################################################################################
 #   Service Layer - Basic Part
