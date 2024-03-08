@@ -1671,7 +1671,7 @@ paths:
                   in: query
                   schema:
                     type: string
-                    example: 'atpc-is-on;atpc-thresh-lower;atpc-thresh-upper;tx-power;transmission-mode-min;transmission-mode-max'
+                    example: ''
                   description: >
                     'If different from empty string, a fields filter with the following value to be added to the request
                     from [/core-model-1-4:control-construct/profile-collection/mwpp-1-0-0-string-p-003/string-profile-1-0:string-profile-pac/string-profile-configuration/string-value]'
