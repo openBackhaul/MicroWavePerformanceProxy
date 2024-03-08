@@ -1062,8 +1062,6 @@ paths:
                           adaptive-modulation-downshift-level: 99
                           xpic-is-available: true
                           supported-as-fixed-configuration: false
-
-
                     - air-interface-identifiers:
                         link-endpoint-id: "101551121B"
                         link-id: "101551121"
