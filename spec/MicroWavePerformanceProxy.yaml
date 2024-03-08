@@ -438,7 +438,7 @@ paths:
                 '500':
                   $ref: '#/components/responses/responseForErroredServiceRequests'
                 default:
-                  $ref: '#/components/responses/responseForErroredServiceRequests'  
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
   /v1/provide-historical-pm-data-of-device:
     post:
       operationId: provideHistoricalPDataOfDevice
@@ -486,17 +486,17 @@ paths:
                           properties:
                             link-endpoint-id:
                               type: string
-                              description: > 
+                              description: >
                                 'Identifier of the microwave link endpoint as used in the Telefonica planning tools
                                 from {$RequestForProvidingHistoricalPmDataCausesReadingNameOfAirAndEthernetInterfaces.LtpDesignation.response.body#external-label}'
                             link-id:
                               type: string
-                              description: > 
+                              description: >
                                 'Identifier of the microwave link as used in the Telefonica planning tools.To be obtained by extracting the substring constituted by the 9 first characters
                                 from {$RequestForProvidingHistoricalPmDataCausesReadingNameOfAirAndEthernetInterfaces.LtpDesignation.response.body#external-label}'
                             logical-termination-point-id:
                               type: string
-                              description: > 
+                              description: >
                                 'Identifier of the microwave link endpoint within the MW SDN domain
                                 from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#uuid}'
                             link-aggregation-identifiers:
@@ -525,9 +525,9 @@ paths:
                                         type: string
                                         description: >
                                           'Interface name as it is represented at the vendor's own management interface'
-                        air-interface-configuration: 
+                        air-interface-configuration:
                           type: object
-                          properties: 
+                          properties:
                             configured-atpc-is-on:
                               type: boolean
                               description: >
@@ -550,7 +550,7 @@ paths:
                                 from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.AirInterfaceConfigurationFromCache.response.body#tx-power}'
                             configured-modulation-minimum:
                               type: object
-                              description:  >
+                              description: >
                                'Configured minimum modulation scheme'
                               properties:
                                 number-of-states:
@@ -590,9 +590,9 @@ paths:
                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/modulation-scheme-name-at-lct}
                                     where {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/transmission-mode-name} == transmissionModeMax'
                                 configured-capacity-maximum:
-                                    type: integer
-                                    description: >
-                                      'Channel capacity in kbps of the configured maximum modulation scheme. To be left blank' 
+                                  type: integer
+                                  description: >
+                                    'Channel capacity in kbps of the configured maximum modulation scheme. To be left blank'
                         air-interface-performance-measurements-list:
                           type: array
                           items:
@@ -600,7 +600,7 @@ paths:
                             properties:
                               granularity-period:
                                 type: string
-                                enum: 
+                                enum:
                                   - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
                                   - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
                                   - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-UNKNOWN'
@@ -727,81 +727,81 @@ paths:
                                   'Total number of blocks that were defect after receiving and could not be corrected by the FEC
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache.response.body#air-interface-2-0:air-interface-historical-performance/historical-performance-data-list/defect-blocks-sum}'
                         transmission-mode-list:
-                              description: 'List of supported Transmission Modes'
-                              type: array
-                              items:
-                                type: object
-                                properties:
-                                  transmission-mode-name:
-                                    type: string
-                                    description: >
-                                     'Key attribute, name of the transmission mode
-                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/transmission-mode-name}'
-                                  number-of-states:
-                                    type: integer
-                                    description: >
-                                     'Number of states in the phase diagram (e.g. BPSK->2 or 256QAM->256)
-                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/modulation-scheme}'
-                                  modulation-scheme-name-at-lct:
-                                    type: string
-                                    description: >
-                                     'Name identifying this transmission mode on the graphical user interface of the local craft terminal
-                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/modulation-scheme-name-at-lct}'
-                                  channel-bandwidth:
-                                    type: integer
-                                    description: >
-                                     'Bandwidth of the transmit channel in kHz
-                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/channel-bandwidth}'
-                                  code-rate:
-                                    type: integer
-                                    description: >
-                                     'Code rate of the coding scheme in %
-                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/code-rate}'
-                                  symbol-rate-reduction-factor:
-                                    type: integer
-                                    description: >
-                                      'Reduction factor for the symbol rate. Example: value would be 4 for 1/4BPSK
-                                      from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/symbol-rate-reduction-factor}'
-                                  transmit-power-minimum:
-                                    type: integer
-                                    description: >
-                                     'Value of the minimum transmit power the modem can operate in dBm
-                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/tx-power-min}'
-                                  transmit-power-maximum:
-                                    type: integer
-                                    description: >
-                                     'Value of the maximum transmit power the modem can operate in dBm
-                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/tx-power-max}'
-                                  receive-threshold:
-                                    type: integer
-                                    description: >
-                                     'Value of the receive level required to decode the received signal with a Bit Error Rate of 1e-6 or less
-                                      from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/rx-threshold'
-                                  transmission-mode-rank:
-                                    type: integer
-                                    description: >
-                                     'Rank of the transmission mode as established by the vendor according to the respective payload data rate
-                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/transmission-mode-rank}'
-                                  adaptive-modulation-upshift-level:
-                                    type: integer
-                                    description: >
-                                      'Value of the receive level that has to be exceeded to shift into a higher modulation scheme
-                                      from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/am-upshift-level}'
-                                  adaptive-modulation-downshift-level:
-                                    type: integer
-                                    description: >
-                                      'Value of the receive level that has to be exceeded for not shifting into a lower modulation scheme
-                                      from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/am-downshift-level}'
-                                  xpic-is-available:
-                                    type: boolean
-                                    description: >
-                                      'In case this transmission mode is capable of XPIC, this attribute shall contain a "true" value. Independent of the actual configuration
-                                      from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/xpic-is-avail}'
-                                  supported-as-fixed-configuration: 
-                                    type: boolean
-                                    description: >
-                                     'If true, the this transmission mode is available for manual configuration when Adaptive Modulation is switched off
-                                     from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/supported-as-fixed-configuration}'
+                          description: 'List of supported Transmission Modes'
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              transmission-mode-name:
+                                type: string
+                                description: >
+                                  'Key attribute, name of the transmission mode
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/transmission-mode-name}'
+                              number-of-states:
+                                type: integer
+                                description: >
+                                  'Number of states in the phase diagram (e.g. BPSK->2 or 256QAM->256)
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/modulation-scheme}'
+                              modulation-scheme-name-at-lct:
+                                type: string
+                                description: >
+                                  'Name identifying this transmission mode on the graphical user interface of the local craft terminal
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/modulation-scheme-name-at-lct}'
+                              channel-bandwidth:
+                                type: integer
+                                description: >
+                                  'Bandwidth of the transmit channel in kHz
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/channel-bandwidth}'
+                              code-rate:
+                                type: integer
+                                description: >
+                                  'Code rate of the coding scheme in %
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/code-rate}'
+                              symbol-rate-reduction-factor:
+                                type: integer
+                                description: >
+                                  'Reduction factor for the symbol rate. Example: value would be 4 for 1/4BPSK
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/symbol-rate-reduction-factor}'
+                              transmit-power-minimum:
+                                type: integer
+                                description: >
+                                  'Value of the minimum transmit power the modem can operate in dBm
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/tx-power-min}'
+                              transmit-power-maximum:
+                                type: integer
+                                description: >
+                                  'Value of the maximum transmit power the modem can operate in dBm
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/tx-power-max}'
+                              receive-threshold:
+                                type: integer
+                                description: >
+                                  'Value of the receive level required to decode the received signal with a Bit Error Rate of 1e-6 or less
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/rx-threshold'
+                              transmission-mode-rank:
+                                type: integer
+                                description: >
+                                  'Rank of the transmission mode as established by the vendor according to the respective payload data rate
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/transmission-mode-rank}'
+                              adaptive-modulation-upshift-level:
+                                type: integer
+                                description: >
+                                  'Value of the receive level that has to be exceeded to shift into a higher modulation scheme
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/am-upshift-level}'
+                              adaptive-modulation-downshift-level:
+                                type: integer
+                                description: >
+                                  'Value of the receive level that has to be exceeded for not shifting into a lower modulation scheme
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/am-downshift-level}'
+                              xpic-is-available:
+                                type: boolean
+                                description: >
+                                  'In case this transmission mode is capable of XPIC, this attribute shall contain a "true" value. Independent of the actual configuration
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/xpic-is-avail}'
+                              supported-as-fixed-configuration:
+                                type: boolean
+                                description: >
+                                  'If true, the this transmission mode is available for manual configuration when Adaptive Modulation is switched off
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/supported-as-fixed-configuration}'
                   ethernet-container-list:
                     description: 'List of ethernet containers found in the given devices'
                     type: array
@@ -813,20 +813,20 @@ paths:
                           properties:
                             interface-name:
                               type: string
-                              description: > 
-                                'Interface name of the EthernetContainer as it is represented at the vendors own management interface, e.g. LAN 1/6/6'                      
+                              description: >
+                                'Interface name of the EthernetContainer as it is represented at the vendors own management interface, e.g. LAN 1/6/6'
                             logical-termination-point-id:
                               type: string
-                              description: > 
-                                'Identifier of the ethernet container within the MW SDN domain' 
+                              description: >
+                                'Identifier of the ethernet container within the MW SDN domain'
                         ethernet-container-performance-measurements-list:
                           type: array
                           items:
                             type: object
                             properties:
-                              granularity-period: 
+                              granularity-period:
                                 type: string
-                                enum: 
+                                enum:
                                   - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
                                   - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
                                   - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-UNKNOWN'
@@ -950,8 +950,8 @@ paths:
                 example:
                   air-interface-list:
                     - air-interface-identifiers:
-                        link-endpoint-id:  "325557888A"
-                        link-id:  "325557888"
+                        link-endpoint-id: "325557888A"
+                        link-id: "325557888"
                         logical-termination-point-id: "RF-2146697744"
                         link-aggregation-identifiers:
                           - link-id: "325557888"
@@ -966,7 +966,7 @@ paths:
                           number-of-states: 4
                           name-at-lct: "4 QAM"
                           configured-capacity-minimum:
-                        configured-modulation-maximum: 
+                        configured-modulation-maximum:
                           number-of-states: 1024
                           name-at-lct: "1024 QAM"
                           configured-capacity-maximum:
@@ -985,7 +985,7 @@ paths:
                           cross-polarization-discrimination-minimum: 30
                           cross-polarization-discrimination-maximum: 31
                           cross-polarization-discrimination-average: 99
-                          operated-transmission-modes-list: 
+                          operated-transmission-modes-list:
                             - transmission-mode-name: "56000-1024-v2"
                               modulation-scheme-name-at-lct:
                               time: 897
@@ -993,7 +993,7 @@ paths:
                             - transmission-mode-name: "56000-128-v4"
                               modulation-scheme-name-at-lct:
                               time: 3
-                              capacity: 
+                              capacity:
                           interval-capacity:
                         - granularity-period: "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN"
                           period-end-time: "2024-03-06T13:15:00+01:00"
@@ -1009,7 +1009,7 @@ paths:
                           cross-polarization-discrimination-minimum: 30
                           cross-polarization-discrimination-maximum: 31
                           cross-polarization-discrimination-average: 99
-                          operated-transmission-modes-list: 
+                          operated-transmission-modes-list:
                             - transmission-mode-name: "56000-1024-v2"
                               modulation-scheme-name-at-lct:
                               time: 897
@@ -1017,8 +1017,8 @@ paths:
                             - transmission-mode-name: "7000-16-v2"
                               modulation-scheme-name-at-lct:
                               time: 3
-                              capacity: 
-                          interval-capacity: 
+                              capacity:
+                          interval-capacity:
                       transmission-mode-list:
                         - transmission-mode-name: "56000-1024-v2"
                           number-of-states: 1024
@@ -1097,15 +1097,15 @@ paths:
                           cross-polarization-discrimination-minimum: 28
                           cross-polarization-discrimination-maximum: 39
                           cross-polarization-discrimination-average: -99
-                          operated-transmission-modes-list: 
-                          - transmission-mode-name: "1361-112000-2048-Light"
-                            modulation-scheme-name-at-lct: "2048 QAM light"
-                            time: 643
-                            capacity:
-                          - transmission-mode-name: 1361-112000-256-Light"
-                            modulation-scheme-name-at-lct: "256 QAM light"
-                            time: 257
-                            capacity: 
+                          operated-transmission-modes-list:
+                            - transmission-mode-name: "1361-112000-2048-Light"
+                              modulation-scheme-name-at-lct: "2048 QAM light"
+                              time: 643
+                              capacity:
+                            - transmission-mode-name: 1361-112000-256-Light"
+                              modulation-scheme-name-at-lct: "256 QAM light"
+                              time: 257
+                              capacity:
                           interval-capacity:
                         - granularity-period: "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN"
                           period-end-time: "2024-03-07T09:45:00+01:00"
@@ -1121,15 +1121,15 @@ paths:
                           cross-polarization-discrimination-minimum: 28
                           cross-polarization-discrimination-maximum: 39
                           cross-polarization-discrimination-average: -99
-                          operated-transmission-modes-list: 
-                          - transmission-mode-name: "1361-112000-2048-Light"
-                            modulation-scheme-name-at-lct: "2048 QAM light"
-                            time: 643
-                            capacity:
-                          - transmission-mode-name: 1361-112000-256-Light"
-                            modulation-scheme-name-at-lct: "256 QAM light"
-                            time: 257
-                            capacity: 
+                          operated-transmission-modes-list:
+                            - transmission-mode-name: "1361-112000-2048-Light"
+                              modulation-scheme-name-at-lct: "2048 QAM light"
+                              time: 643
+                              capacity:
+                            - transmission-mode-name: 1361-112000-256-Light"
+                              modulation-scheme-name-at-lct: "256 QAM light"
+                              time: 257
+                              capacity:
                           interval-capacity:
                       transmission-mode-list:
                         - transmission-mode-name: "1303-80000-512-Std"
@@ -1174,8 +1174,6 @@ paths:
                           adaptive-modulation-downshift-level: 99
                           xpic-is-available: true
                           supported-as-fixed-configuration: true
-                          
-
                   ethernet-container-list:
                     - ethernet-container-identifiers:
                         interface-name: "WAN 1/1/1"
@@ -1282,20 +1280,20 @@ paths:
                           jabber-frames-ingress: "-1"
                           unknown-protocol-frames-input: "-1"
           headers:
-              life-cycle-state:
-                schema:
-                  type: string
-                  enum:
-                    - 'EXPERIMENTAL'
-                    - 'OPERATIONAL'
-                    - 'DEPRECATED'
-                    - 'OBSOLETE'
-                    - 'UNKNOWN'
-                    - 'NOT_YET_DEFINED'
-                  example: 'EXPERIMENTAL'
-                description: >
-                    'Life cycle state of the consumed service
-                    find in [/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-s-is-000/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+            life-cycle-state:
+              schema:
+                type: string
+                enum:
+                  - 'EXPERIMENTAL'
+                  - 'OPERATIONAL'
+                  - 'DEPRECATED'
+                  - 'OBSOLETE'
+                  - 'UNKNOWN'
+                  - 'NOT_YET_DEFINED'
+                example: 'EXPERIMENTAL'
+              description: >
+                  'Life cycle state of the consumed service
+                  find in [/core-model-1-4:control-construct/logical-termination-point=mwpp-1-0-0-op-s-is-000/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
