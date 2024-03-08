@@ -134,7 +134,7 @@ profile-instances:
     capability:
       string-name: 'RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.ConfigurationsFromCache'
     configuration:
-      string-value: 'atpc-is-on;transmission-mode-min;transmission-mode-max'
+      string-value: ''
 
   - profile-name: 'StringProfile'
     uuid: 'mwpp-1-0-0-string-p-004'
