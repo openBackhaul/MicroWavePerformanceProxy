@@ -1743,10 +1743,6 @@ paths:
                                     symbol-rate-reduction-factor:
                                       type: integer
                                       description: 'Reduction factor for the symbol rate. Example: value would be 4 for 1/4BPSK'
-                                    
-
-
-
                         example:
                           air-interface-2-0:air-interface-capability:
                             transmission-mode-list:
@@ -1756,7 +1752,6 @@ paths:
                                 modulation-scheme-name-at-lct: '4 QAM'
                                 code-rate: -1
                                 symbol-rate-reduction-factor: 1
-
                               - transmission-mode-name: '0028-4096QAM-175232/206076-1'
                                 channel-bandwidth: 28000
                                 modulation-scheme: 4096
