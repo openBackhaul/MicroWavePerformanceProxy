@@ -762,46 +762,6 @@ paths:
                                 description: >
                                   'Reduction factor for the symbol rate. Example: value would be 4 for 1/4BPSK
                                   from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/symbol-rate-reduction-factor}'
-                              transmit-power-minimum:
-                                type: integer
-                                description: >
-                                  'Value of the minimum transmit power the modem can operate in dBm
-                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/tx-power-min}'
-                              transmit-power-maximum:
-                                type: integer
-                                description: >
-                                  'Value of the maximum transmit power the modem can operate in dBm
-                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/tx-power-max}'
-                              receive-threshold:
-                                type: integer
-                                description: >
-                                  'Value of the receive level required to decode the received signal with a Bit Error Rate of 1e-6 or less
-                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/rx-threshold'
-                              transmission-mode-rank:
-                                type: integer
-                                description: >
-                                  'Rank of the transmission mode as established by the vendor according to the respective payload data rate
-                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/transmission-mode-rank}'
-                              adaptive-modulation-upshift-level:
-                                type: integer
-                                description: >
-                                  'Value of the receive level that has to be exceeded to shift into a higher modulation scheme
-                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/am-upshift-level}'
-                              adaptive-modulation-downshift-level:
-                                type: integer
-                                description: >
-                                  'Value of the receive level that has to be exceeded for not shifting into a lower modulation scheme
-                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/am-downshift-level}'
-                              xpic-is-available:
-                                type: boolean
-                                description: >
-                                  'In case this transmission mode is capable of XPIC, this attribute shall contain a "true" value. Independent of the actual configuration
-                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/xpic-is-avail}'
-                              supported-as-fixed-configuration:
-                                type: boolean
-                                description: >
-                                  'If true, the this transmission mode is available for manual configuration when Adaptive Modulation is switched off
-                                  from {$RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceCapabilitiesFromCache.CapabilitiesFromCache.response.body#air-interface-2-0:air-interface-capability/transmission-mode-list/supported-as-fixed-configuration}'
                   ethernet-container-list:
                     description: 'List of ethernet containers found in the given devices'
                     type: array
@@ -1031,42 +991,18 @@ paths:
                           channel-bandwidth: 56000
                           code-rate: 94
                           symbol-rate-reduction-factor: 1
-                          transmit-power-minimum: 4
-                          transmit-power-maximum: -10
-                          receive-threshold: 99
-                          transmission-mode-rank: 456
-                          adaptive-modulation-upshift-level: 99
-                          adaptive-modulation-downshift-level: 99
-                          xpic-is-available: true
-                          supported-as-fixed-configuration: false
                         - transmission-mode-name: "7000-16-v2"
                           number-of-states: 16
                           modulation-scheme-name-at-lct: "16 QAM"
                           channel-bandwidth: 7000
                           code-rate: 86
                           symbol-rate-reduction-factor: 1
-                          transmit-power-minimum: -10
-                          transmit-power-maximum: 4
-                          receive-threshold: 99
-                          transmission-mode-rank: 21
-                          adaptive-modulation-upshift-level: 99
-                          adaptive-modulation-downshift-level: 99
-                          xpic-is-available: true
-                          supported-as-fixed-configuration: false
                         - transmission-mode-name: "40000-128-v0"
                           number-of-states: 128
                           modulation-scheme-name-at-lct: "128 QAM"
                           channel-bandwidth: 40000
                           code-rate: 94
-                          symbol-rate-reduction-factor: 1
-                          transmit-power-minimum: -10
-                          transmit-power-maximum: 4
-                          receive-threshold: 99
-                          transmission-mode-rank: 229
-                          adaptive-modulation-upshift-level: 99
-                          adaptive-modulation-downshift-level: 99
-                          xpic-is-available: true
-                          supported-as-fixed-configuration: false
+                          symbol-rate-reduction-factor: 
                     - air-interface-identifiers:
                         link-endpoint-id: "101551121B"
                         link-id: "101551121"
@@ -1141,42 +1077,18 @@ paths:
                           channel-bandwidth: 80000
                           code-rate: -1
                           symbol-rate-reduction-factor: 1
-                          transmit-power-minimum: 99
-                          transmit-power-maximum: 21
-                          receive-threshold: 99
-                          transmission-mode-rank: 5120
-                          adaptive-modulation-upshift-level: 99
-                          adaptive-modulation-downshift-level: 99
-                          xpic-is-available: true
-                          supported-as-fixed-configuration: true
                         - transmission-mode-name: "1356-7000-16-Strong"
                           number-of-states: 16
                           modulation-scheme-name-at-lct: "16 QAM Strong"
                           channel-bandwidth: 7000
                           code-rate: -1
                           symbol-rate-reduction-factor: 1
-                          transmit-power-minimum: 99
-                          transmit-power-maximum: 24
-                          receive-threshold: 99
-                          transmission-mode-rank: 159
-                          adaptive-modulation-upshift-level: 99
-                          adaptive-modulation-downshift-level: 99
-                          xpic-is-available: true
-                          supported-as-fixed-configuration: false
                         - transmission-mode-name: "1361-112000-2048-Light"
                           number-of-states: 2048
                           modulation-scheme-name-at-lct: "2048 QAM Light"
                           channel-bandwidth: 40000
                           code-rate: 94
                           symbol-rate-reduction-factor: 1
-                          transmit-power-minimum: -10
-                          transmit-power-maximum: 4
-                          receive-threshold: 99
-                          transmission-mode-rank: 555
-                          adaptive-modulation-upshift-level: 99
-                          adaptive-modulation-downshift-level: 99
-                          xpic-is-available: true
-                          supported-as-fixed-configuration: true
                   ethernet-container-list:
                     - ethernet-container-identifiers:
                         interface-name: "WAN 1/1/1"
@@ -1825,6 +1737,16 @@ paths:
                                     modulation-scheme-name-at-lct:
                                       type: string
                                       description: 'Name identifying this transmission mode on the graphical user interface of the local craft terminal'
+                                    code-rate: 
+                                      type: integer
+                                      description: 'Code rate of the coding scheme in %'
+                                    symbol-rate-reduction-factor:
+                                      type: integer
+                                      description: 'Reduction factor for the symbol rate. Example: value would be 4 for 1/4BPSK'
+                                    
+
+
+
                         example:
                           air-interface-2-0:air-interface-capability:
                             transmission-mode-list:
@@ -1832,10 +1754,15 @@ paths:
                                 channel-bandwidth: 28000
                                 modulation-scheme: 4
                                 modulation-scheme-name-at-lct: '4 QAM'
+                                code-rate: -1
+                                symbol-rate-reduction-factor: 1
+
                               - transmission-mode-name: '0028-4096QAM-175232/206076-1'
                                 channel-bandwidth: 28000
                                 modulation-scheme: 4096
                                 modulation-scheme-name-at-lct: '4096 QAM'
+                                code-rate: -1
+                                symbol-rate-reduction-factor: 1
                   headers:
                     x-correlator:
                       schema:
