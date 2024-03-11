@@ -814,11 +814,13 @@ paths:
                             interface-name:
                               type: string
                               description: >
-                                'Interface name of the EthernetContainer as it is represented at the vendors own management interface, e.g. LAN 1/6/6'
+                                'Interface name of the EthernetContainer as it is represented at the vendors own management interface, e.g. LAN 1/6/6
+                                from {$RequestForProvidingHistoricalPmDataCausesReadingNameOfAirAndEthernetInterfaces.LtpDesignation.response.body#original-ltp-name'
                             logical-termination-point-id:
                               type: string
                               description: >
-                                'Identifier of the ethernet container within the MW SDN domain'
+                                'Identifier of the ethernet container within the MW SDN domain
+                                from {$RequestForProvidingHistoricalPmDataCausesReadingLtpStructure.LtpStructure.response.body#uuid}'
                         ethernet-container-performance-measurements-list:
                           type: array
                           items:
