@@ -441,7 +441,7 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
   /v1/provide-historical-pm-data-of-device:
     post:
-      operationId: provideHistoricalPDataOfDevice
+      operationId: provideHistoricalPmDataOfDevice
       summary: 'Provides the historical performance data, together with some relevant configurations and capabilities, of air-interfaces and ethernet-containers found in the device'
       tags:
         - IndividualServices
