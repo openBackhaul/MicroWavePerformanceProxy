@@ -1002,7 +1002,7 @@ paths:
                           modulation-scheme-name-at-lct: "128 QAM"
                           channel-bandwidth: 40000
                           code-rate: 94
-                          symbol-rate-reduction-factor: 
+                          symbol-rate-reduction-factor: 1
                     - air-interface-identifiers:
                         link-endpoint-id: "101551121B"
                         link-id: "101551121"
@@ -1737,7 +1737,7 @@ paths:
                                     modulation-scheme-name-at-lct:
                                       type: string
                                       description: 'Name identifying this transmission mode on the graphical user interface of the local craft terminal'
-                                    code-rate: 
+                                    code-rate:
                                       type: integer
                                       description: 'Code rate of the coding scheme in %'
                                     symbol-rate-reduction-factor:
