@@ -831,6 +831,9 @@ paths:
                                   - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
                                   - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-UNKNOWN'
                                   - 'ethernet-container-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-NOT_YET_DEFINED'
+                                description: >
+                                  'Time period between reset of the underlying counter
+                                  from {$RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache.response.body#ethernet-container-2-0:ethernet-container-historical-performance/historical-performance-data-list/granularity-period}'
                               period-end-time:
                                 type: string
                                 format: date-time
