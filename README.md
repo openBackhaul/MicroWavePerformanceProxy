@@ -1,7 +1,7 @@
 # MicroWavePerformanceProxy
 
 ### Location
-The AutomatedLinkAcceptanceProxy belongs to the NetworkApplications.
+The MicroWavePerformanceProxy belongs to the NetworkApplications.
 
 ### Description
 The MWPP microservice acts as a proxy between the MicroWaveDeviceInventory and an external tool, e.g. APT (in which the performance data shall be stored).
