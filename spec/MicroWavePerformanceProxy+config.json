@@ -244,7 +244,7 @@
           "profile-name": "string-profile-1-0:PROFILE_NAME_TYPE_STRING_PROFILE",
           "string-profile-1-0:string-profile-pac": {
             "string-profile-capability": {
-              "string-name": "RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.ConfigurationsFromCache"
+              "string-name": "RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.AirInterfaceConfigurationFromCache"
             },
             "string-profile-configuration": {
               "string-value": ""
@@ -268,7 +268,7 @@
           "profile-name": "string-profile-1-0:PROFILE_NAME_TYPE_STRING_PROFILE",
           "string-profile-1-0:string-profile-pac": {
             "string-profile-capability": {
-              "string-name": "RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.HistoricalAirInterfacePerformanceFromCache"
+              "string-name": "RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache"
             },
             "string-profile-configuration": {
               "string-value": ""
@@ -280,7 +280,7 @@
           "profile-name": "string-profile-1-0:PROFILE_NAME_TYPE_STRING_PROFILE",
           "string-profile-1-0:string-profile-pac": {
             "string-profile-capability": {
-              "string-name": "RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.HistoricalEthernetContainerPerformanceFromCache"
+              "string-name": "RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache"
             },
             "string-profile-configuration": {
               "string-value": ""

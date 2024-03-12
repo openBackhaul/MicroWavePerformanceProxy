@@ -132,7 +132,7 @@ profile-instances:
   - profile-name: 'StringProfile'
     uuid: 'mwpp-1-0-0-string-p-003'
     capability:
-      string-name: 'RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.ConfigurationsFromCache'
+      string-name: 'RequestForProvidingHistoricalPmDataCausesReadingAirInterfaceConfigurationFromCache.AirInterfaceConfigurationFromCache'
     configuration:
       string-value: 'atpc-is-on;transmission-mode-min;transmission-mode-max'
 
@@ -146,13 +146,13 @@ profile-instances:
   - profile-name: 'StringProfile'
     uuid: 'mwpp-1-0-0-string-p-005'
     capability:
-      string-name: 'RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.HistoricalAirInterfacePerformanceFromCache'
+      string-name: 'RequestForProvidingHistoricalPmDataCausesReadingHistoricalAirInterfacePerformanceFromCache.AirInterfaceHistoricalPmFromCache'
     configuration:
       string-value: ''
 
   - profile-name: 'StringProfile'
     uuid: 'mwpp-1-0-0-string-p-006'
     capability:
-      string-name: 'RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.HistoricalEthernetContainerPerformanceFromCache'
+      string-name: 'RequestForProvidingHistoricalPmDataCausesReadingHistoricalEthernetContainerPerformanceFromCache.EthernetContainerHistoricalPmFromCache'
     configuration:
       string-value: ''
